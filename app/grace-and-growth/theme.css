@@ -1,0 +1,11 @@
+/* Route-scoped theme for Grace and Growth landing page (poster palette) */
+.grace-and-growth-theme {
+  --gg-terracotta: #c45c3b;
+  --gg-terracotta-dark: #a34d2e;
+  --gg-slate: #1e293b;
+  --gg-slate-muted: #475569;
+  --gg-blue: #2563eb;
+  --gg-blue-muted: #3b82b6;
+  --gg-off-white: #fafafa;
+  --gg-white: #ffffff;
+}
