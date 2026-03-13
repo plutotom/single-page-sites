@@ -1,3 +1,5 @@
+import ContactSection from "./ContactSection";
+
 export default function GraceAndGrowthPage() {
   return (
     <div className="min-h-screen overflow-x-hidden bg-(--gg-off-white) text-(--gg-slate)">
@@ -184,18 +186,7 @@ export default function GraceAndGrowthPage() {
           </ol>
         </section>
 
-        {/* Contact */}
-        <section className="mb-12">
-          <h2 className="mb-4 border-b-2 border-(--gg-blue) pb-2 text-lg font-semibold text-(--gg-blue)">
-            Contact
-          </h2>
-          <ul className="space-y-2 text-(--gg-slate-muted)">
-            <li>Joanna Dasari — joanna.dasari@my.wheaton.edu</li>
-            <li>Dave Mendrygal — dave.mendrygal@my.wheaton.edu</li>
-            <li>Isaiah Proctor — isaiah.proctor@my.wheaton.edu</li>
-            <li>Sandra Yu Rueger, PhD — sandra.rueger@wheaton.edu</li>
-          </ul>
-        </section>
+        <ContactSection />
 
         {/* Secondary CTA reminder */}
         <section className="mb-12 rounded-lg border border-(--gg-blue-muted) bg-(--gg-white) p-4 sm:p-6">
