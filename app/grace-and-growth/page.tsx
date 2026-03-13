@@ -23,7 +23,7 @@ export default function GraceAndGrowthPage() {
           </h1>
           <p className="mt-3 text-xs opacity-95 sm:mt-4 sm:text-sm">
             Joanna Dasari, M.A. · Dave Mendrygal, M.A. · Isaiah Proctor, B.A. ·
-            Sandra Yu Rueger, PhD.
+            Sandra Yu Rueger, Ph.D., L.M.F.T.
           </p>
         </div>
       </header>
@@ -68,7 +68,7 @@ export default function GraceAndGrowthPage() {
           <p className="text-(--gg-slate-muted)">
             Our framework bridges shared concerns between psychologists and
             faith communities, combining scientific knowledge about ADHD and
-            cognitive vulnerability with scriptural wisdom that affirms children
+            cognitive/behavioral vulnerability with scriptural wisdom that affirms children
             are &quot;fearfully and wonderfully made&quot; and capable of growth
             despite setbacks. This integration supports interventions that
             emphasize external, unstable, and specific explanations for setbacks
@@ -154,7 +154,7 @@ export default function GraceAndGrowthPage() {
               </a>
             </li>
             <li>
-              Nolen-Hoeksema, S., Girgus, J. S., & Seligman, M. E. P. (1986a).
+              Nolen-Hoeksema, S., Girgus, J. S., & Seligman, M. E. P. (1986).
               Learned helplessness in children: A longitudinal study of
               depression, achievement, and explanatory style.{" "}
               <em>Journal of Personality and Social Psychology</em>, 51(2),
