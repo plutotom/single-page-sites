@@ -9,7 +9,7 @@ const sourceSerif = Source_Serif_4({
 });
 
 export const metadata: Metadata = {
-  title: "Grace and Growth | Supporting Children with ADHD through Psychology and Faith",
+  title: "Grace and Growth Poster",
   description:
     "Conference poster: research and practical integration for supporting children with ADHD in ministry settings. References, contact, and feedback.",
 };
