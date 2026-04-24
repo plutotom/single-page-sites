@@ -62,12 +62,12 @@ export default function EstResearchPage() {
       <header className="border-b border-(--est-border) bg-(--est-card) px-4 py-8 shadow-sm sm:px-8 sm:py-10">
         <div className="mx-auto max-w-3xl">
           <p className="mb-4">
-            <Link
+            {/* <Link
               href="/"
               className="inline-flex min-h-[44px] items-center text-sm font-medium text-(--est-accent) underline-offset-4 hover:underline focus:outline-none focus:ring-2 focus:ring-(--est-accent) focus:ring-offset-2"
             >
               ← Home
-            </Link>
+            </Link> */}
           </p>
           <p className="mb-2 text-xs font-medium uppercase tracking-[0.12em] text-(--est-subtle) sm:text-sm">
             Clinical psychology · Cognitive Behavioral Therapy
