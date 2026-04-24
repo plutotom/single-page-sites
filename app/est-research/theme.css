@@ -1,0 +1,14 @@
+/* Route-scoped theme: clinical / academic reader (CBT class notes) */
+.est-research-theme {
+  --est-ink: #0f172a;
+  --est-ink-muted: #334155;
+  --est-subtle: #64748b;
+  --est-surface: #f8fafc;
+  --est-card: #ffffff;
+  --est-border: #e2e8f0;
+  --est-accent: #1e40af;
+  --est-accent-soft: #dbeafe;
+  --est-accent-hover: #1d4ed8;
+  --est-step: #0f766e;
+  --est-step-soft: #ccfbf1;
+}
