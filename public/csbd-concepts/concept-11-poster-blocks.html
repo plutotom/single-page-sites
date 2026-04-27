@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CSBD Infographic Concept 11 - Poster Blocks</title>
+  <style>
+    :root {
+      --ink: #1f1c2e;
+      --muted: #5f587d;
+      --line: #cdc7e8;
+      --a: #efe9ff;
+      --b: #e8f7ff;
+      --c: #fff3e6;
+      --d: #eefbe9;
+      --accent: #5538be;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 22px; font-family: "Avenir Next", "Segoe UI", sans-serif; background: #f7f6ff; color: var(--ink); }
+    .page { max-width: 1040px; margin: 0 auto; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: #fff; }
+    header { padding: 24px; background: linear-gradient(120deg, #f2eeff 0%, #fff 100%); border-bottom: 1px solid var(--line); }
+    h1 { margin: 0; font-size: 2.05rem; color: #372085; }
+    .subtitle { margin: 5px 0 0; color: var(--muted); font-weight: 600; }
+    .def { margin-top: 10px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: #fff; font-size: 0.95rem; }
+    .mosaic { display: grid; grid-template-columns: repeat(12, 1fr); gap: 10px; padding: 12px; background: #fbfaff; }
+    .tile { border: 1px solid var(--line); border-radius: 12px; padding: 10px; background: #fff; }
+    .tile h2 { margin: 0 0 7px; font-size: 0.84rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); }
+    .tile ul { margin: 0; padding-left: 16px; }
+    .tile li { margin-bottom: 4px; font-size: 0.89rem; line-height: 1.33; }
+    .a { grid-column: span 5; background: var(--a); }
+    .b { grid-column: span 7; background: var(--b); }
+    .c { grid-column: span 4; background: var(--c); }
+    .d { grid-column: span 4; background: var(--d); }
+    .e { grid-column: span 4; }
+    .f { grid-column: span 8; }
+    .g { grid-column: span 4; }
+    @media print { body { padding: 0; background: #fff; } .page { border-radius: 0; max-width: none; } .tile { break-inside: avoid; } }
+  </style>
+</head>
+<body>
+  <article class="page">
+    <header>
+      <h1>Compulsive Sexual Behavior Disorder (CSBD)</h1>
+      <p class="subtitle">A brief psychoeducation guide</p>
+      <p class="def"><strong>What is CSBD?</strong> A pattern of sexual urges or behaviors that are difficult to control and continue despite negative consequences.</p>
+    </header>
+    <main class="mosaic">
+      <section class="tile a">
+        <h2>Alternative Conceptualizations</h2>
+        <ul>
+          <li>Hypersexual Disorder / Sexual Desire Dysregulation</li>
+          <li>Out-of-Control Sexual Behavior</li>
+          <li>Behavioral Addiction Model</li>
+          <li>Obsessive-Compulsive Spectrum Model</li>
+          <li>Impulse Control Disorder Model</li>
+          <li>Moral Incongruence / PPMI</li>
+        </ul>
+      </section>
+      <section class="tile b">
+        <h2>Key Diagnostic Features</h2>
+        <ul>
+          <li>Repeated failure to control sexual urges or behaviors</li>
+          <li>Sexual behavior becomes central in life</li>
+          <li>Multiple failed attempts to cut back</li>
+          <li>Continues despite harm or consequences</li>
+          <li>Causes distress or impairment for 6 months or more</li>
+        </ul>
+      </section>
+      <section class="tile c">
+        <h2>Etiology / Why It May Develop</h2>
+        <ul>
+          <li>Trauma history</li>
+          <li>Emotional dysregulation</li>
+          <li>Depression or anxiety</li>
+          <li>Family history of addiction</li>
+          <li>Easy access to sexual content online</li>
+        </ul>
+      </section>
+      <section class="tile d">
+        <h2>Prevalence</h2>
+        <ul>
+          <li>Rates vary across studies</li>
+          <li>More commonly reported in men</li>
+          <li>Many people do not seek treatment</li>
+        </ul>
+      </section>
+      <section class="tile e">
+        <h2>Course / Prognosis</h2>
+        <ul>
+          <li>Often begins in late adolescence</li>
+          <li>Can become chronic without treatment</li>
+          <li>Therapy and support may help reduce symptoms</li>
+        </ul>
+      </section>
+      <section class="tile f">
+        <h2>Cultural + Spiritual Considerations</h2>
+        <ul>
+          <li>Sexual norms differ across cultures</li>
+          <li>Moral or religious shame can increase distress</li>
+          <li>Distress from values conflict alone does not equal CSBD</li>
+        </ul>
+      </section>
+      <section class="tile g">
+        <h2>Resources</h2>
+        <ul>
+          <li>World Health Organization ICD-11 CSBD page</li>
+          <li>Sex Addicts Anonymous (SAA)</li>
+          <li>SMART Recovery</li>
+          <li>5-4-3-2-1 grounding exercise</li>
+        </ul>
+      </section>
+    </main>
+  </article>
+</body>
+</html>

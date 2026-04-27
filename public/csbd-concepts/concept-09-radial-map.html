@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CSBD Infographic Concept 9 - Radial Map</title>
+  <style>
+    :root {
+      --ink: #1a1630;
+      --muted: #595278;
+      --line: #cbc4e6;
+      --lav: #f3efff;
+      --mint: #ecfbf7;
+      --gold: #f7f0dc;
+      --accent: #5a36cb;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 24px;
+      font-family: "Avenir Next", "Century Gothic", "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 8% 10%, #efeaff 0%, transparent 24%),
+        radial-gradient(circle at 90% 8%, #e8fff9 0%, transparent 28%),
+        #f9f8ff;
+    }
+    .page {
+      max-width: 1050px;
+      margin: 0 auto;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 14px 30px rgba(41, 26, 95, 0.08);
+    }
+    header {
+      padding: 24px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(120deg, #f2edff 0%, #f7fffd 100%);
+    }
+    h1 { margin: 0; font-size: 2.05rem; letter-spacing: -0.01em; }
+    .subtitle { margin: 5px 0 0; color: var(--muted); font-weight: 600; }
+    .definition {
+      margin-top: 12px;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #fff;
+      font-size: 0.95rem;
+      line-height: 1.42;
+    }
+    .radial-zone {
+      padding: 20px;
+      display: grid;
+      grid-template-columns: 1fr 1.1fr 1fr;
+      gap: 12px;
+      align-items: stretch;
+      background: #fcfbff;
+    }
+    .orbital {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 11px;
+      background: #fff;
+      min-height: 200px;
+    }
+    .orbital.alt-1 { background: var(--lav); }
+    .orbital.alt-2 { background: var(--mint); }
+    .orbital.alt-3 { background: var(--gold); }
+    .hub {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      aspect-ratio: 1 / 1;
+      display: grid;
+      align-content: center;
+      justify-items: center;
+      text-align: center;
+      padding: 24px;
+      background: radial-gradient(circle, #ffffff 0%, #f3f0ff 100%);
+    }
+    .hub strong {
+      font-size: 1.5rem;
+      color: var(--accent);
+      line-height: 1.05;
+    }
+    .hub p { margin: 8px 0 0; font-size: 0.92rem; color: var(--muted); }
+    h2 {
+      margin: 0 0 7px;
+      font-size: 0.83rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #4a378f;
+    }
+    ul { margin: 0; padding-left: 16px; }
+    li { margin-bottom: 4px; font-size: 0.9rem; line-height: 1.34; }
+    .resources {
+      margin: 0 20px 20px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+      padding: 12px;
+    }
+    @media print {
+      body { padding: 0; background: #fff; }
+      .page { border-radius: 0; box-shadow: none; max-width: none; }
+      .orbital, .resources { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <article class="page">
+    <header>
+      <h1>Compulsive Sexual Behavior Disorder (CSBD)</h1>
+      <p class="subtitle">A brief psychoeducation guide</p>
+      <p class="definition"><strong>What is CSBD?</strong> A pattern of sexual urges or behaviors that are difficult to control and continue despite negative consequences.</p>
+    </header>
+
+    <main class="radial-zone">
+      <section class="orbital alt-1">
+        <h2>Alternative Conceptualizations</h2>
+        <ul>
+          <li>Hypersexual Disorder / Sexual Desire Dysregulation</li>
+          <li>Out-of-Control Sexual Behavior</li>
+          <li>Behavioral Addiction Model</li>
+          <li>Obsessive-Compulsive Spectrum Model</li>
+          <li>Impulse Control Disorder Model</li>
+          <li>Moral Incongruence / PPMI</li>
+        </ul>
+      </section>
+
+      <div class="hub">
+        <strong>CSBD</strong>
+        <p>Patterns, impact, and treatment considerations in one visual map.</p>
+      </div>
+
+      <section class="orbital alt-2">
+        <h2>Key Diagnostic Features</h2>
+        <ul>
+          <li>Repeated failure to control sexual urges or behaviors</li>
+          <li>Sexual behavior becomes central in life</li>
+          <li>Multiple failed attempts to cut back</li>
+          <li>Continues despite harm or consequences</li>
+          <li>Causes distress or impairment for 6 months or more</li>
+        </ul>
+      </section>
+
+      <section class="orbital">
+        <h2>Etiology / Why It May Develop</h2>
+        <ul>
+          <li>Trauma history</li>
+          <li>Emotional dysregulation</li>
+          <li>Depression or anxiety</li>
+          <li>Family history of addiction</li>
+          <li>Easy access to sexual content online</li>
+        </ul>
+      </section>
+
+      <section class="orbital alt-3">
+        <h2>Course / Prognosis</h2>
+        <ul>
+          <li>Often begins in late adolescence</li>
+          <li>Can become chronic without treatment</li>
+          <li>Therapy and support may help reduce symptoms</li>
+        </ul>
+        <h2 style="margin-top:10px;">Prevalence</h2>
+        <ul>
+          <li>Rates vary across studies</li>
+          <li>More commonly reported in men</li>
+          <li>Many people do not seek treatment</li>
+        </ul>
+      </section>
+
+      <section class="orbital">
+        <h2>Cultural + Spiritual Considerations</h2>
+        <ul>
+          <li>Sexual norms differ across cultures</li>
+          <li>Moral or religious shame can increase distress</li>
+          <li>Distress from values conflict alone does not equal CSBD</li>
+        </ul>
+      </section>
+    </main>
+
+    <section class="resources">
+      <h2>Resources</h2>
+      <ul>
+        <li>World Health Organization ICD-11 CSBD page</li>
+        <li>Sex Addicts Anonymous (SAA)</li>
+        <li>SMART Recovery</li>
+        <li>5-4-3-2-1 grounding exercise</li>
+      </ul>
+    </section>
+  </article>
+</body>
+</html>

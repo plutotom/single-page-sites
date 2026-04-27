@@ -1,0 +1,934 @@
+/* Route-scoped lab styles for component experiments. */
+.component-playground-theme {
+  --cp-bg: #30302f;
+  --cp-bg-deep: #262625;
+  --cp-card: #282827;
+  --cp-card-raised: #2d2d2c;
+  --cp-line: rgba(255, 255, 255, 0.055);
+  --cp-line-strong: rgba(255, 255, 255, 0.11);
+  --cp-cream: #f1f3df;
+  --cp-muted: #aaa9a2;
+  --cp-muted-soft: #7d7c78;
+  --cp-accent: #92cbb8;
+  --cp-accent-strong: #b6e5d4;
+  --cp-accent-soft: rgba(146, 203, 184, 0.18);
+  --cp-shadow: 0 18px 38px rgba(0, 0, 0, 0.22);
+  --cp-radius: 26px;
+
+  min-height: 100vh;
+  background: #111;
+  color: var(--cp-cream);
+  font-family: var(--font-playground-app), ui-rounded, "SF Pro Rounded",
+    "SF Pro Display", system-ui, sans-serif;
+}
+
+.component-playground-theme::before {
+  display: none;
+}
+
+.component-playground-theme ::selection {
+  background: var(--cp-accent);
+  color: var(--cp-bg-deep);
+}
+
+.component-playground-phone {
+  min-height: 100svh;
+  background:
+    radial-gradient(circle at 92% 14%, var(--cp-accent-soft), transparent 8rem),
+    linear-gradient(180deg, var(--cp-bg) 0%, var(--cp-bg-deep) 100%);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.component-playground-panel {
+  border: 1px solid var(--cp-line);
+  background: var(--cp-card);
+  box-shadow: var(--cp-shadow);
+}
+
+.component-playground-raised {
+  background: var(--cp-card-raised);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.035),
+    var(--cp-shadow);
+}
+
+.component-playground-card-title {
+  color: var(--cp-cream);
+  text-shadow: 0 0 14px rgba(241, 243, 223, 0.12);
+}
+
+.component-playground-form-page {
+  animation: component-playground-page-in 240ms ease-out;
+}
+
+.component-playground-nav-button {
+  background: var(--cp-card-raised);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.035),
+    0 14px 30px rgba(0, 0, 0, 0.18);
+}
+
+.component-playground-nav-button-primary {
+  background: var(--cp-accent-strong);
+  box-shadow:
+    0 16px 34px rgba(0, 0, 0, 0.22),
+    0 0 30px var(--cp-accent-soft);
+}
+
+.component-playground-pill-wrap {
+  animation: component-playground-page-in 220ms ease-out;
+}
+
+.component-playground-pill {
+  border: 1px solid var(--cp-line-strong);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.045);
+  color: var(--cp-cream);
+  padding: 0.5rem 0.9rem;
+  font-size: 0.87rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  transition:
+    border-color 140ms ease,
+    background-color 140ms ease,
+    color 140ms ease,
+    transform 140ms ease;
+}
+
+.component-playground-pill:hover {
+  border-color: var(--cp-accent);
+  transform: translateY(-1px);
+}
+
+.component-playground-pill-selected {
+  border-color: color-mix(in srgb, var(--cp-accent) 68%, #fff);
+  background: color-mix(in srgb, var(--cp-accent-soft) 60%, transparent);
+}
+
+.component-playground-pill-add {
+  width: 2.15rem;
+  justify-content: center;
+  display: inline-flex;
+  align-items: center;
+  padding-inline: 0;
+}
+
+.component-playground-pill-active {
+  border-color: color-mix(in srgb, var(--cp-accent) 78%, #fff);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--cp-accent) 25%, transparent);
+}
+
+.component-playground-create-row {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.component-playground-create-input {
+  height: 2.5rem;
+  width: 100%;
+  border: 1px solid color-mix(in srgb, var(--cp-accent) 72%, #fff);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--cp-accent-strong);
+  padding: 0 0.92rem;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  outline: none;
+}
+
+.component-playground-create-input::placeholder {
+  color: color-mix(in srgb, var(--cp-accent) 82%, #fff);
+}
+
+.component-playground-create-input:focus {
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--cp-accent) 45%, transparent);
+}
+
+.component-playground-create-cancel {
+  color: var(--cp-muted);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.component-playground-more-link {
+  border: 0;
+  background: transparent;
+  color: var(--cp-muted);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.component-playground-spec-card {
+  border: 1px solid color-mix(in srgb, var(--cp-accent) 48%, #fff);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--cp-accent-soft) 72%, transparent);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.component-playground-spec-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 0;
+  background: transparent;
+  color: var(--cp-cream);
+  padding: 0.72rem 0.88rem;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.component-playground-spec-content {
+  border-top: 1px solid color-mix(in srgb, var(--cp-accent) 40%, #fff);
+  padding: 0.72rem 0.88rem 0.86rem;
+  color: color-mix(in srgb, var(--cp-cream) 75%, var(--cp-muted));
+  display: grid;
+  gap: 0.48rem;
+  font-size: 0.74rem;
+  line-height: 1.35;
+}
+
+.component-playground-spec-content p {
+  margin: 0;
+}
+
+.component-playground-spec-content strong {
+  color: var(--cp-cream);
+  font-weight: 800;
+}
+
+.component-playground-spec-content code {
+  color: var(--cp-accent-strong);
+  font-size: 0.72rem;
+}
+
+.component-playground-datetime-wrap {
+  animation: component-playground-page-in 220ms ease-out;
+}
+
+.component-playground-datetime-card {
+  border: 1px solid var(--cp-line-strong);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.035);
+  padding: 0.86rem 0.9rem 0.92rem;
+}
+
+.component-playground-datetime-card-alt {
+  background:
+    radial-gradient(circle at 88% 14%, var(--cp-accent-soft), transparent 7rem),
+    rgba(255, 255, 255, 0.03);
+}
+
+.component-playground-datetime-title {
+  margin: 0;
+  color: var(--cp-cream);
+  font-size: 0.83rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.component-playground-datetime-subtitle {
+  margin: 0.35rem 0 0.62rem;
+  color: var(--cp-muted);
+  font-size: 0.74rem;
+}
+
+.component-playground-preset-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.45rem;
+}
+
+.component-playground-day-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.45rem;
+}
+
+.component-playground-timeline-grid {
+  margin-top: 0.55rem;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.42rem;
+}
+
+.component-playground-preset-chip {
+  border: 1px solid var(--cp-line-strong);
+  border-radius: 11px;
+  min-height: 2.2rem;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--cp-muted);
+  font-size: 0.75rem;
+  font-weight: 800;
+  transition:
+    border-color 120ms ease,
+    background-color 120ms ease,
+    color 120ms ease;
+}
+
+.component-playground-preset-chip-active {
+  border-color: color-mix(in srgb, var(--cp-accent) 72%, #fff);
+  background: color-mix(in srgb, var(--cp-accent-soft) 62%, transparent);
+  color: var(--cp-accent-strong);
+}
+
+.component-playground-input-label {
+  margin-top: 0.76rem;
+  display: block;
+  color: var(--cp-muted-soft);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.component-playground-datetime-input {
+  margin-top: 0.35rem;
+  width: 100%;
+  min-height: 2.55rem;
+  border: 1px solid color-mix(in srgb, var(--cp-accent) 38%, #fff);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--cp-cream);
+  padding: 0 0.76rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.component-playground-datetime-summary {
+  margin-top: 0.75rem;
+  border-top: 1px solid var(--cp-line);
+  padding-top: 0.62rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+}
+
+.component-playground-datetime-summary span {
+  color: var(--cp-muted-soft);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  font-weight: 800;
+}
+
+.component-playground-datetime-summary strong {
+  color: var(--cp-accent-strong);
+  font-size: 0.8rem;
+  text-align: right;
+}
+
+.component-playground-wheel-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+.component-playground-wheel-col {
+  border: 1px solid var(--cp-line);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  padding: 0.42rem;
+  display: grid;
+  gap: 0.32rem;
+}
+
+.component-playground-wheel-chip {
+  border: 1px solid var(--cp-line-strong);
+  border-radius: 9px;
+  min-height: 2rem;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--cp-muted);
+  font-size: 0.71rem;
+  font-weight: 800;
+}
+
+.component-playground-wheel-chip-active {
+  border-color: color-mix(in srgb, var(--cp-accent) 70%, #fff);
+  background: color-mix(in srgb, var(--cp-accent-soft) 58%, transparent);
+  color: var(--cp-accent-strong);
+}
+
+.component-playground-apply-button {
+  margin-top: 0.72rem;
+  width: 100%;
+  min-height: 2.55rem;
+  border: 1px solid color-mix(in srgb, var(--cp-accent) 68%, #fff);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--cp-accent-soft) 60%, transparent);
+  color: var(--cp-accent-strong);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+
+.component-playground-emotion-wrap {
+  animation: component-playground-page-in 220ms ease-out;
+}
+
+.component-playground-emotion-search {
+  margin-top: 0.34rem;
+  margin-bottom: 0.56rem;
+  width: 100%;
+  min-height: 2.45rem;
+  border: 1px solid color-mix(in srgb, var(--cp-accent) 40%, #fff);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--cp-cream);
+  padding: 0 0.72rem;
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+.component-playground-emotion-search::placeholder {
+  color: var(--cp-muted-soft);
+}
+
+.component-playground-emotion-scroll {
+  max-height: 20rem;
+  overflow-y: auto;
+  display: grid;
+  gap: 0.56rem;
+  padding-right: 0.1rem;
+}
+
+.component-playground-emotion-card {
+  border: 1px solid var(--cp-line-strong);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.035);
+  min-height: 5rem;
+  display: grid;
+  grid-template-columns: 0.86rem 1fr auto;
+  align-items: center;
+  overflow: hidden;
+  color: var(--cp-cream);
+  text-align: left;
+}
+
+.component-playground-emotion-strip {
+  align-self: stretch;
+  background: linear-gradient(180deg, #f0a6db 0%, #d98ac2 100%);
+}
+
+.component-playground-emotion-content {
+  padding: 0.78rem 0.82rem;
+  display: grid;
+  gap: 0.24rem;
+}
+
+.component-playground-emotion-title {
+  font-size: 0.84rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+
+.component-playground-emotion-description {
+  color: var(--cp-muted);
+  font-size: 0.78rem;
+  line-height: 1.2;
+}
+
+.component-playground-emotion-check {
+  min-width: 1.9rem;
+  padding-right: 0.62rem;
+  color: #f4c8e7;
+  font-size: 1.12rem;
+  font-weight: 700;
+  text-align: right;
+}
+
+.component-playground-emotion-card-active {
+  border-color: color-mix(in srgb, #f0a6db 62%, #fff);
+  box-shadow: 0 0 0 1px color-mix(in srgb, #f0a6db 35%, transparent);
+}
+
+.component-playground-voice-wrap {
+  position: relative;
+  animation: component-playground-page-in 220ms ease-out;
+}
+
+.component-playground-voice-card {
+  border: 1px solid var(--cp-line-strong);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.035);
+  padding: 0.84rem 0.86rem 1rem;
+}
+
+.component-playground-journal-input {
+  margin-top: 0.46rem;
+  width: 100%;
+  resize: none;
+  border: 1px solid color-mix(in srgb, var(--cp-accent) 38%, #fff);
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--cp-cream);
+  padding: 0.75rem 0.78rem;
+  font-size: 0.85rem;
+  line-height: 1.35;
+}
+
+.component-playground-journal-input::placeholder {
+  color: var(--cp-muted-soft);
+}
+
+.component-playground-journal-footer {
+  margin-top: 0.48rem;
+  display: flex;
+  justify-content: space-between;
+  color: var(--cp-muted);
+  font-size: 0.69rem;
+  font-weight: 700;
+}
+
+.component-playground-mic-dock {
+  margin-top: 0.8rem;
+  display: grid;
+  place-items: center;
+}
+
+.component-playground-mic-button {
+  height: 3.2rem;
+  width: 3.2rem;
+  border: 1px solid color-mix(in srgb, var(--cp-accent) 65%, #fff);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--cp-accent-soft) 62%, transparent);
+  color: var(--cp-accent-strong);
+  display: grid;
+  place-items: center;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+.component-playground-mic-button-active {
+  box-shadow:
+    0 0 0 2px color-mix(in srgb, var(--cp-accent) 35%, transparent),
+    0 12px 24px rgba(0, 0, 0, 0.2);
+  transform: translateY(-1px);
+}
+
+.component-playground-glass-scene {
+  --cp-glass-level: 50%;
+  --cp-glass-bg-strength: 0.35;
+  border: 1px solid var(--cp-line-strong);
+  border-radius: 20px;
+  padding: 1.1rem 0.9rem 1rem;
+  background:
+    radial-gradient(
+      circle at 50% 72%,
+      color-mix(in srgb, var(--cp-accent) calc(var(--cp-glass-bg-strength) * 100%), transparent),
+      transparent 72%
+    ),
+    rgba(255, 255, 255, 0.028);
+  transition: background 140ms ease;
+  touch-action: none;
+}
+
+.component-playground-glass-hint {
+  margin: 0;
+  color: var(--cp-muted);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.component-playground-glass-wrap {
+  margin: 0.7rem auto 0;
+  border: 0;
+  background: transparent;
+  display: grid;
+  place-items: center;
+  width: 100%;
+}
+
+.component-playground-glass-shape {
+  position: relative;
+  display: block;
+  width: 10rem;
+  height: 11.4rem;
+  border: 2px solid color-mix(in srgb, var(--cp-cream) 70%, transparent);
+  border-top-width: 7px;
+  border-radius: 18px 18px 26px 26px;
+  clip-path: polygon(8% 0, 92% 0, 82% 100%, 18% 100%);
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.component-playground-glass-liquid {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: var(--cp-glass-level);
+  background:
+    radial-gradient(circle at 30% 14%, rgba(255, 255, 255, 0.35), transparent 38%),
+    linear-gradient(180deg, color-mix(in srgb, var(--cp-accent) 80%, #d5efaf), var(--cp-accent));
+  transition: height 110ms linear;
+}
+
+.component-playground-glass-liquid::before {
+  content: "";
+  position: absolute;
+  left: -4%;
+  right: -4%;
+  top: -9px;
+  height: 18px;
+  border-radius: 999px;
+  background: rgba(233, 247, 208, 0.72);
+}
+
+.component-playground-glass-glow {
+  position: absolute;
+  inset: 0;
+  box-shadow:
+    inset 9px 0 10px rgba(255, 255, 255, 0.14),
+    inset -10px 0 11px rgba(0, 0, 0, 0.08);
+  pointer-events: none;
+}
+
+.component-playground-glass-readout {
+  margin: 0.7rem 0 0;
+  color: var(--cp-muted);
+  font-size: 0.78rem;
+}
+
+.component-playground-glass-readout strong {
+  color: var(--cp-accent-strong);
+}
+
+.component-playground-slider-card {
+  border: 1px solid var(--cp-line-strong);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.035);
+  padding: 0.78rem 0.82rem 0.9rem;
+}
+
+.component-playground-slider-label {
+  margin: 0;
+  color: var(--cp-cream);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+.component-playground-slider-subtitle {
+  margin: 0.38rem 0 0;
+  color: var(--cp-muted);
+  font-size: 0.72rem;
+  line-height: 1.35;
+}
+
+.component-playground-slider-top-row {
+  margin-top: 0.52rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.component-playground-slider-value {
+  color: var(--cp-accent-strong);
+  font-size: 0.88rem;
+  font-weight: 800;
+}
+
+.component-playground-slider-hint {
+  color: var(--cp-muted-soft);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.component-playground-range {
+  margin-top: 0.62rem;
+  width: 100%;
+  accent-color: var(--cp-accent-strong);
+}
+
+.component-playground-slider-marks {
+  margin-top: 0.4rem;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 0.2rem;
+}
+
+.component-playground-slider-marks span {
+  text-align: center;
+  color: var(--cp-muted-soft);
+  font-size: 0.65rem;
+  font-weight: 700;
+}
+
+.component-playground-mark-active {
+  color: var(--cp-accent-strong) !important;
+}
+
+.component-playground-slider-pill {
+  margin-top: 0.42rem;
+  display: inline-block;
+  border: 1px solid color-mix(in srgb, var(--cp-accent) 45%, #fff);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--cp-accent-soft) 50%, transparent);
+  color: var(--cp-accent-strong);
+  padding: 0.24rem 0.56rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.component-playground-slider-marks-tight {
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+}
+
+.component-playground-sentiment-row {
+  margin-top: 0.54rem;
+  display: flex;
+  justify-content: space-between;
+  color: var(--cp-muted);
+  font-size: 0.66rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.component-playground-thermo-wrap {
+  margin-top: 0.58rem;
+  display: grid;
+  justify-items: center;
+  gap: 0.44rem;
+}
+
+.component-playground-range-vertical {
+  appearance: slider-vertical;
+  -webkit-appearance: slider-vertical;
+  width: 2rem;
+  height: 7.5rem;
+  accent-color: var(--cp-accent-strong);
+}
+
+.component-playground-segmented-shell {
+  margin-top: 0.6rem;
+  position: relative;
+}
+
+.component-playground-segmented-row {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.36rem;
+}
+
+.component-playground-segment {
+  border: 1px solid var(--cp-line-strong);
+  border-radius: 10px;
+  min-height: 2rem;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--cp-muted);
+  font-size: 0.75rem;
+  font-weight: 800;
+  transition:
+    border-color 120ms ease,
+    background-color 120ms ease,
+    color 120ms ease;
+}
+
+.component-playground-segment-active {
+  border-color: color-mix(in srgb, var(--cp-accent) 70%, #fff);
+  background: color-mix(in srgb, var(--cp-accent-soft) 62%, transparent);
+  color: var(--cp-accent-strong);
+}
+
+.component-playground-segment-range {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  opacity: 0.02;
+  cursor: pointer;
+}
+
+.component-playground-ladder-row {
+  margin-top: 0.58rem;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  align-items: end;
+  gap: 0.34rem;
+}
+
+.component-playground-ladder-step {
+  border: 1px solid var(--cp-line-strong);
+  border-radius: 10px;
+  height: var(--cp-step-height);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--cp-muted-soft);
+  font-size: 0.61rem;
+  font-weight: 800;
+  transition:
+    border-color 120ms ease,
+    background-color 120ms ease,
+    color 120ms ease,
+    transform 120ms ease;
+}
+
+.component-playground-ladder-step-active {
+  border-color: color-mix(in srgb, var(--cp-accent) 68%, #fff);
+  background: color-mix(in srgb, var(--cp-accent-soft) 58%, transparent);
+  color: var(--cp-accent-strong);
+}
+
+.component-playground-ladder-step:active {
+  transform: translateY(1px);
+}
+
+.component-playground-arc-row {
+  margin-top: 0.65rem;
+  display: grid;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+  align-items: end;
+  gap: 0.22rem;
+}
+
+.component-playground-arc-notch {
+  border: 1px solid var(--cp-line-strong);
+  border-radius: 8px;
+  min-height: 1.75rem;
+  transform: translateY(var(--cp-arc-offset));
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--cp-muted-soft);
+  font-size: 0.58rem;
+  font-weight: 800;
+  transition:
+    transform 140ms ease,
+    border-color 120ms ease,
+    background-color 120ms ease,
+    color 120ms ease;
+}
+
+.component-playground-arc-notch-active {
+  border-color: color-mix(in srgb, var(--cp-accent) 74%, #fff);
+  background: color-mix(in srgb, var(--cp-accent-soft) 62%, transparent);
+  color: var(--cp-accent-strong);
+  transform: translateY(calc(var(--cp-arc-offset) - 3px));
+}
+
+.component-playground-dial {
+  margin: 0.7rem auto 0.2rem;
+  position: relative;
+  width: 10rem;
+  height: 6.8rem;
+}
+
+.component-playground-dial-center {
+  position: absolute;
+  left: 50%;
+  bottom: 0.2rem;
+  transform: translateX(-50%);
+  border: 1px solid color-mix(in srgb, var(--cp-accent) 62%, #fff);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--cp-accent-soft) 58%, transparent);
+  color: var(--cp-accent-strong);
+  min-width: 3.3rem;
+  min-height: 2.1rem;
+  display: grid;
+  place-items: center;
+  line-height: 1;
+}
+
+.component-playground-dial-center strong {
+  font-size: 0.95rem;
+}
+
+.component-playground-dial-center span {
+  font-size: 0.58rem;
+  color: var(--cp-muted);
+}
+
+.component-playground-dial-dot {
+  position: absolute;
+  left: 50%;
+  bottom: 0.95rem;
+  width: 1.8rem;
+  height: 1.8rem;
+  border: 1px solid var(--cp-line-strong);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--cp-muted-soft);
+  font-size: 0.65rem;
+  font-weight: 800;
+  transform-origin: center 2.95rem;
+  transform: rotate(var(--cp-angle)) translateY(-2.95rem) rotate(calc(-1 * var(--cp-angle)));
+  transition:
+    border-color 120ms ease,
+    background-color 120ms ease,
+    color 120ms ease,
+    transform 140ms ease;
+}
+
+.component-playground-dial-dot-active {
+  border-color: color-mix(in srgb, var(--cp-accent) 74%, #fff);
+  background: color-mix(in srgb, var(--cp-accent-soft) 68%, transparent);
+  color: var(--cp-accent-strong);
+}
+
+.component-playground-wave-row {
+  margin-top: 0.6rem;
+  display: grid;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+  align-items: end;
+  gap: 0.2rem;
+}
+
+.component-playground-wave-step {
+  border: 1px solid var(--cp-line-strong);
+  border-radius: 8px 8px 10px 10px;
+  height: var(--cp-wave-height);
+  transform: translateY(var(--cp-wave-offset));
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--cp-muted-soft);
+  font-size: 0.56rem;
+  font-weight: 800;
+  transition:
+    border-color 120ms ease,
+    background-color 120ms ease,
+    color 120ms ease,
+    transform 140ms ease;
+}
+
+.component-playground-wave-step span {
+  display: inline-block;
+  transform: translateY(1px);
+}
+
+.component-playground-wave-step-active {
+  border-color: color-mix(in srgb, var(--cp-accent) 70%, #fff);
+  background: color-mix(in srgb, var(--cp-accent-soft) 62%, transparent);
+  color: var(--cp-accent-strong);
+}
+
+.component-playground-tabbar {
+  padding-bottom: max(0.9rem, env(safe-area-inset-bottom));
+}
+
+@keyframes component-playground-page-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 480px) {
+  .component-playground-phone {
+    min-height: min(900px, 100svh);
+  }
+}

@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CSBD Infographic Concept 7 - Modern Warm</title>
+  <style>
+    :root {
+      --ink: #1d1b2b;
+      --muted: #564e79;
+      --panel: #ffffff;
+      --shell: #f7f4ff;
+      --accent: #5f4bd8;
+      --accent-soft: #e8e3ff;
+      --line: #d9d2f8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 26px;
+      font-family: "Avenir Next", "Trebuchet MS", "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 8%, #efeaff 0%, transparent 28%),
+        radial-gradient(circle at 90% 20%, #fcecff 0%, transparent 32%),
+        var(--shell);
+    }
+    .page {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 24px rgba(75, 52, 151, 0.08);
+    }
+    header {
+      padding: 24px;
+      background: linear-gradient(120deg, #f2eeff 0%, #fff7fc 100%);
+      border-bottom: 1px solid var(--line);
+    }
+    h1 { margin: 0; font-size: 2rem; letter-spacing: -0.01em; color: #2f2269; }
+    .subtitle { margin: 6px 0 0; color: var(--muted); font-weight: 600; }
+    .definition {
+      margin-top: 12px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 0.96rem;
+      line-height: 1.4;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      padding: 16px;
+      background: #fcfbff;
+    }
+    .card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px 12px 10px;
+      min-height: 170px;
+      position: relative;
+    }
+    .card::before {
+      content: "";
+      position: absolute;
+      left: 12px;
+      top: 0;
+      width: 56px;
+      height: 4px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent), #9b83ff);
+    }
+    h2 {
+      margin: 8px 0 8px;
+      font-size: 0.86rem;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: #4a3ca8;
+    }
+    ul { margin: 0; padding-left: 16px; }
+    li { margin-bottom: 4px; font-size: 0.9rem; line-height: 1.33; }
+    .resources {
+      grid-column: 1 / -1;
+      min-height: auto;
+      background: linear-gradient(180deg, #fff 0%, #f9f7ff 100%);
+    }
+    .pill-row {
+      margin: 0 16px 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .pill {
+      border: 1px solid var(--line);
+      background: var(--accent-soft);
+      color: #433a79;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      padding: 4px 10px;
+    }
+    @media print {
+      body { padding: 0; background: #fff; }
+      .page { border-radius: 0; box-shadow: none; max-width: none; }
+      .card { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <article class="page">
+    <header>
+      <h1>Compulsive Sexual Behavior Disorder (CSBD)</h1>
+      <p class="subtitle">A brief psychoeducation guide</p>
+      <p class="definition"><strong>What is CSBD?</strong> A pattern of sexual urges or behaviors that are difficult to control and continue despite negative consequences.</p>
+    </header>
+    <main class="grid">
+      <section class="card">
+        <h2>Alternative Conceptualizations</h2>
+        <ul>
+          <li>Hypersexual Disorder / Sexual Desire Dysregulation</li>
+          <li>Out-of-Control Sexual Behavior</li>
+          <li>Behavioral Addiction Model</li>
+          <li>Obsessive-Compulsive Spectrum Model</li>
+          <li>Impulse Control Disorder Model</li>
+          <li>Moral Incongruence / PPMI</li>
+        </ul>
+      </section>
+      <section class="card">
+        <h2>Key Diagnostic Features</h2>
+        <ul>
+          <li>Repeated failure to control sexual urges or behaviors</li>
+          <li>Sexual behavior becomes central in life</li>
+          <li>Multiple failed attempts to cut back</li>
+          <li>Continues despite harm or consequences</li>
+          <li>Causes distress or impairment for 6 months or more</li>
+        </ul>
+      </section>
+      <section class="card">
+        <h2>Etiology / Why It May Develop</h2>
+        <ul>
+          <li>Trauma history</li>
+          <li>Emotional dysregulation</li>
+          <li>Depression or anxiety</li>
+          <li>Family history of addiction</li>
+          <li>Easy access to sexual content online</li>
+        </ul>
+      </section>
+      <section class="card">
+        <h2>Prevalence</h2>
+        <ul>
+          <li>Rates vary across studies</li>
+          <li>More commonly reported in men</li>
+          <li>Many people do not seek treatment</li>
+        </ul>
+      </section>
+      <section class="card">
+        <h2>Course / Prognosis</h2>
+        <ul>
+          <li>Often begins in late adolescence</li>
+          <li>Can become chronic without treatment</li>
+          <li>Therapy and support may help reduce symptoms</li>
+        </ul>
+      </section>
+      <section class="card">
+        <h2>Cultural + Spiritual Considerations</h2>
+        <ul>
+          <li>Sexual norms differ across cultures</li>
+          <li>Moral or religious shame can increase distress</li>
+          <li>Distress from values conflict alone does not equal CSBD</li>
+        </ul>
+      </section>
+      <section class="card resources">
+        <h2>Resources</h2>
+        <ul>
+          <li>World Health Organization ICD-11 CSBD page</li>
+          <li>Sex Addicts Anonymous (SAA)</li>
+          <li>SMART Recovery</li>
+          <li>5-4-3-2-1 grounding exercise</li>
+        </ul>
+      </section>
+    </main>
+    <div class="pill-row" aria-hidden="true">
+      <span class="pill">print-friendly</span>
+      <span class="pill">clinical language</span>
+      <span class="pill">modern card layout</span>
+    </div>
+  </article>
+</body>
+</html>

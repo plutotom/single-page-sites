@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CSBD Infographic Concept 13 - Dashboard Modern</title>
+  <style>
+    :root {
+      --ink: #162127; --muted: #486068; --line: #c6d9de; --teal: #178483; --mint: #eaf8f7;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 22px; background: #f3fbfa; color: var(--ink); font-family: "Segoe UI", "Avenir Next", sans-serif; }
+    .page { max-width: 1050px; margin: 0 auto; border: 1px solid var(--line); border-radius: 14px; background: #fff; overflow: hidden; }
+    .top { padding: 20px; border-bottom: 1px solid var(--line); background: linear-gradient(100deg, #ebfbf8 0%, #fff 100%); }
+    h1 { margin: 0; font-size: 2rem; color: #0f6665; } .sub { margin: 4px 0 0; color: var(--muted); font-weight: 600; }
+    .def { margin-top: 10px; border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; background: #fff; font-size: 0.95rem; }
+    .layout { display: grid; grid-template-columns: 260px 1fr; min-height: 620px; }
+    .nav { border-right: 1px solid var(--line); background: #fbfffe; padding: 12px; }
+    .chip { border: 1px solid var(--line); border-radius: 999px; padding: 6px 10px; margin-bottom: 8px; font-size: 0.8rem; color: #2b5f5f; background: var(--mint); }
+    .main { padding: 12px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; align-content: start; }
+    .panel { border: 1px solid var(--line); border-radius: 10px; padding: 10px; background: #fff; }
+    .panel.wide { grid-column: 1 / -1; background: #f8fffe; }
+    h2 { margin: 0 0 7px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--teal); }
+    ul { margin: 0; padding-left: 16px; } li { margin-bottom: 4px; font-size: 0.89rem; line-height: 1.33; }
+    @media print { body { padding: 0; background: #fff; } .page { border-radius: 0; max-width: none; } .panel { break-inside: avoid; } }
+  </style>
+</head>
+<body>
+  <article class="page">
+    <header class="top">
+      <h1>Compulsive Sexual Behavior Disorder (CSBD)</h1>
+      <p class="sub">A brief psychoeducation guide</p>
+      <p class="def"><strong>What is CSBD?</strong> A pattern of sexual urges or behaviors that are difficult to control and continue despite negative consequences.</p>
+    </header>
+    <div class="layout">
+      <aside class="nav">
+        <div class="chip">Definition</div>
+        <div class="chip">Conceptual models</div>
+        <div class="chip">Diagnostic markers</div>
+        <div class="chip">Etiology</div>
+        <div class="chip">Population patterns</div>
+        <div class="chip">Course</div>
+        <div class="chip">Culture + spirituality</div>
+        <div class="chip">Resources</div>
+      </aside>
+      <main class="main">
+        <section class="panel"><h2>Alternative Conceptualizations</h2><ul><li>Hypersexual Disorder / Sexual Desire Dysregulation</li><li>Out-of-Control Sexual Behavior</li><li>Behavioral Addiction Model</li><li>Obsessive-Compulsive Spectrum Model</li><li>Impulse Control Disorder Model</li><li>Moral Incongruence / PPMI</li></ul></section>
+        <section class="panel"><h2>Key Diagnostic Features</h2><ul><li>Repeated failure to control sexual urges or behaviors</li><li>Sexual behavior becomes central in life</li><li>Multiple failed attempts to cut back</li><li>Continues despite harm or consequences</li><li>Causes distress or impairment for 6 months or more</li></ul></section>
+        <section class="panel"><h2>Etiology / Why It May Develop</h2><ul><li>Trauma history</li><li>Emotional dysregulation</li><li>Depression or anxiety</li><li>Family history of addiction</li><li>Easy access to sexual content online</li></ul></section>
+        <section class="panel"><h2>Prevalence + Course / Prognosis</h2><ul><li>Rates vary across studies</li><li>More commonly reported in men</li><li>Many people do not seek treatment</li><li>Often begins in late adolescence</li><li>Can become chronic without treatment</li><li>Therapy and support may help reduce symptoms</li></ul></section>
+        <section class="panel wide"><h2>Cultural + Spiritual Considerations</h2><ul><li>Sexual norms differ across cultures</li><li>Moral or religious shame can increase distress</li><li>Distress from values conflict alone does not equal CSBD</li></ul></section>
+        <section class="panel wide"><h2>Resources</h2><ul><li>World Health Organization ICD-11 CSBD page</li><li>Sex Addicts Anonymous (SAA)</li><li>SMART Recovery</li><li>5-4-3-2-1 grounding exercise</li></ul></section>
+      </main>
+    </div>
+  </article>
+</body>
+</html>
