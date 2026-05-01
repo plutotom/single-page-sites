@@ -32,10 +32,11 @@ export default function SleepVideosPage() {
           <div className="aspect-video bg-(--sv-surface-soft)">
             <iframe
               className="h-full w-full"
-              src={`https://www.youtube.com/embed/videoseries?list=${UPLOADS_PLAYLIST_ID}`}
+              src={`https://www.youtube-nocookie.com/embed/videoseries?list=${UPLOADS_PLAYLIST_ID}&rel=0`}
               title={`${CHANNEL_HANDLE} uploads playlist`}
-              loading="lazy"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              loading="eager"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allow="autoplay; encrypted-media; picture-in-picture; web-share"
               allowFullScreen
             />
           </div>
@@ -45,23 +46,22 @@ export default function SleepVideosPage() {
           <h2 className="mb-4 text-lg font-semibold tracking-tight sm:text-xl">
             More videos from her channel
           </h2>
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid gap-3 sm:grid-cols-2">
             {QUICK_PICK_INDEXES.map((index) => (
-              <article
+              <a
                 key={index}
-                className="overflow-hidden rounded-xl border border-(--sv-border) bg-(--sv-surface)"
+                href={`https://www.youtube.com/playlist?list=${UPLOADS_PLAYLIST_ID}&playnext=1&index=${index}`}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-xl border border-(--sv-border) bg-(--sv-surface) px-4 py-3 transition-colors hover:bg-(--sv-surface-soft)"
               >
-                <div className="aspect-video bg-(--sv-surface-soft)">
-                  <iframe
-                    className="h-full w-full"
-                    src={`https://www.youtube.com/embed/videoseries?list=${UPLOADS_PLAYLIST_ID}&index=${index}`}
-                    title={`${CHANNEL_HANDLE} upload quick pick ${index}`}
-                    loading="lazy"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                  />
-                </div>
-              </article>
+                <p className="text-sm font-semibold text-(--sv-text)">
+                  Open another video (slot {index})
+                </p>
+                <p className="mt-1 text-xs text-(--sv-muted)">
+                  Opens from {CHANNEL_HANDLE}'s uploads playlist
+                </p>
+              </a>
             ))}
           </div>
         </section>
