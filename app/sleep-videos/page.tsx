@@ -1,11 +1,35 @@
+"use client";
+
 import Link from "next/link";
+import { useMemo, useState } from "react";
 
 const CHANNEL_HANDLE = "@OzleyASMR";
 const CHANNEL_ID = "UC_ARaeDGHVLAqi6whEWQRTg";
 const UPLOADS_PLAYLIST_ID = `UU${CHANNEL_ID.slice(2)}`;
-const QUICK_PICK_INDEXES = [1, 4, 7, 10, 13, 16] as const;
+const VIDEO_CHOICES = [
+  { label: "Latest upload", type: "playlist", value: "1" },
+  { label: "Selected video 1", type: "video", value: "Z7YtrS_6t9k" },
+  { label: "Selected video 2", type: "video", value: "aBQ7i42DAzo" },
+  { label: "Selected video 3", type: "video", value: "U5DNh3Zb-bE" },
+  { label: "Selected video 4", type: "video", value: "moW14bJ9Vgg" },
+  { label: "Selected video 5", type: "video", value: "sDkwiFJkQ9Q" },
+] as const;
 
 export default function SleepVideosPage() {
+  const [selectedChoice, setSelectedChoice] = useState<(typeof VIDEO_CHOICES)[number]>(
+    VIDEO_CHOICES[0],
+  );
+  const embedSrc = useMemo(
+    () => {
+      if (selectedChoice.type === "video") {
+        return `https://www.youtube-nocookie.com/embed/${selectedChoice.value}?rel=0`;
+      }
+
+      return `https://www.youtube-nocookie.com/embed/videoseries?list=${UPLOADS_PLAYLIST_ID}&index=${selectedChoice.value}&rel=0`;
+    },
+    [selectedChoice],
+  );
+
   return (
     <main className="min-h-screen bg-(--sv-bg) px-4 py-8 text-(--sv-text) sm:px-6 sm:py-10">
       <div className="mx-auto w-full max-w-5xl">
@@ -32,8 +56,9 @@ export default function SleepVideosPage() {
           <div className="aspect-video bg-(--sv-surface-soft)">
             <iframe
               className="h-full w-full"
-              src={`https://www.youtube-nocookie.com/embed/videoseries?list=${UPLOADS_PLAYLIST_ID}&rel=0`}
-              title={`${CHANNEL_HANDLE} uploads playlist`}
+              key={`${selectedChoice.type}-${selectedChoice.value}`}
+              src={embedSrc}
+              title={`${CHANNEL_HANDLE} selected video`}
               loading="eager"
               referrerPolicy="strict-origin-when-cross-origin"
               allow="autoplay; encrypted-media; picture-in-picture; web-share"
@@ -44,24 +69,30 @@ export default function SleepVideosPage() {
 
         <section>
           <h2 className="mb-4 text-lg font-semibold tracking-tight sm:text-xl">
-            More videos from her channel
+            Choose a video
           </h2>
           <div className="grid gap-3 sm:grid-cols-2">
-            {QUICK_PICK_INDEXES.map((index) => (
-              <a
-                key={index}
-                href={`https://www.youtube.com/playlist?list=${UPLOADS_PLAYLIST_ID}&playnext=1&index=${index}`}
-                target="_blank"
-                rel="noreferrer"
-                className="rounded-xl border border-(--sv-border) bg-(--sv-surface) px-4 py-3 transition-colors hover:bg-(--sv-surface-soft)"
+            {VIDEO_CHOICES.map((choice) => (
+              <button
+                key={`${choice.type}-${choice.value}`}
+                type="button"
+                onClick={() => setSelectedChoice(choice)}
+                className={`rounded-xl border px-4 py-3 text-left transition-colors ${
+                  selectedChoice.type === choice.type &&
+                  selectedChoice.value === choice.value
+                    ? "border-(--sv-accent) bg-(--sv-surface-soft)"
+                    : "border-(--sv-border) bg-(--sv-surface) hover:bg-(--sv-surface-soft)"
+                }`}
               >
                 <p className="text-sm font-semibold text-(--sv-text)">
-                  Open another video (slot {index})
+                  {choice.label}
                 </p>
                 <p className="mt-1 text-xs text-(--sv-muted)">
-                  Opens from {CHANNEL_HANDLE}'s uploads playlist
+                  {choice.type === "video"
+                    ? `Video ID: ${choice.value}`
+                    : `Playlist slot ${choice.value}`}
                 </p>
-              </a>
+              </button>
             ))}
           </div>
         </section>
