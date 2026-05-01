@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
 
 const CHANNEL_HANDLE = "@OzleyASMR";
 const CHANNEL_ID = "UC_ARaeDGHVLAqi6whEWQRTg";
@@ -16,9 +17,29 @@ const VIDEO_CHOICES = [
 ] as const;
 
 export default function SleepVideosPage() {
-  const [selectedChoice, setSelectedChoice] = useState<(typeof VIDEO_CHOICES)[number]>(
-    VIDEO_CHOICES[0],
-  );
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const videoParam = searchParams.get("video");
+  const slotParam = searchParams.get("slot");
+
+  const selectedChoice = useMemo<(typeof VIDEO_CHOICES)[number]>(() => {
+    if (videoParam) {
+      const matchedVideo = VIDEO_CHOICES.find(
+        (choice) => choice.type === "video" && choice.value === videoParam,
+      );
+      if (matchedVideo) return matchedVideo;
+    }
+
+    if (slotParam) {
+      const matchedSlot = VIDEO_CHOICES.find(
+        (choice) => choice.type === "playlist" && choice.value === slotParam,
+      );
+      if (matchedSlot) return matchedSlot;
+    }
+
+    return VIDEO_CHOICES[0];
+  }, [slotParam, videoParam]);
+
   const embedSrc = useMemo(
     () => {
       if (selectedChoice.type === "video") {
@@ -29,6 +50,16 @@ export default function SleepVideosPage() {
     },
     [selectedChoice],
   );
+
+  const choiceToHref = (choice: (typeof VIDEO_CHOICES)[number]): string => {
+    const params = new URLSearchParams();
+    if (choice.type === "video") {
+      params.set("video", choice.value);
+    } else {
+      params.set("slot", choice.value);
+    }
+    return `${pathname}?${params.toString()}`;
+  };
 
   return (
     <main className="min-h-screen bg-(--sv-bg) px-4 py-8 text-(--sv-text) sm:px-6 sm:py-10">
@@ -76,7 +107,9 @@ export default function SleepVideosPage() {
               <button
                 key={`${choice.type}-${choice.value}`}
                 type="button"
-                onClick={() => setSelectedChoice(choice)}
+                onClick={() => {
+                  window.location.assign(choiceToHref(choice));
+                }}
                 className={`rounded-xl border px-4 py-3 text-left transition-colors ${
                   selectedChoice.type === choice.type &&
                   selectedChoice.value === choice.value
