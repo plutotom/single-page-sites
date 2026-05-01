@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 
 const CHANNEL_HANDLE = "@OzleyASMR";
@@ -17,10 +17,29 @@ const VIDEO_CHOICES = [
 ] as const;
 
 export default function SleepVideosPage() {
+  return (
+    <Suspense
+      fallback={
+        <main className="min-h-screen bg-(--sv-bg) px-4 py-8 text-(--sv-text) sm:px-6 sm:py-10">
+          <div className="mx-auto w-full max-w-5xl">
+            <p className="text-sm text-(--sv-muted)">Loading sleep videos...</p>
+          </div>
+        </main>
+      }
+    >
+      <SleepVideosClientPage />
+    </Suspense>
+  );
+}
+
+function SleepVideosClientPage() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const videoParam = searchParams.get("video");
   const slotParam = searchParams.get("slot");
+  const hostParam = searchParams.get("host");
+  const embedHost =
+    hostParam === "standard" ? "www.youtube.com" : "www.youtube-nocookie.com";
 
   const selectedChoice = useMemo<(typeof VIDEO_CHOICES)[number]>(() => {
     if (videoParam) {
@@ -40,16 +59,15 @@ export default function SleepVideosPage() {
     return VIDEO_CHOICES[0];
   }, [slotParam, videoParam]);
 
-  const embedSrc = useMemo(
-    () => {
-      if (selectedChoice.type === "video") {
-        return `https://www.youtube-nocookie.com/embed/${selectedChoice.value}?rel=0`;
-      }
+  const embedSrc = useMemo(() => {
+    const baseParams = "rel=0&playsinline=1&modestbranding=1";
+    if (selectedChoice.type === "video") {
+      return `https://${embedHost}/embed/${selectedChoice.value}?${baseParams}`;
+    }
 
-      return `https://www.youtube-nocookie.com/embed/videoseries?list=${UPLOADS_PLAYLIST_ID}&index=${selectedChoice.value}&rel=0`;
-    },
-    [selectedChoice],
-  );
+    return `https://${embedHost}/embed/videoseries?list=${UPLOADS_PLAYLIST_ID}&index=${selectedChoice.value}&${baseParams}`;
+  }, [embedHost, selectedChoice]);
+  const embedKey = `${embedHost}-${selectedChoice.type}-${selectedChoice.value}`;
 
   const choiceToHref = (choice: (typeof VIDEO_CHOICES)[number]): string => {
     const params = new URLSearchParams();
@@ -58,8 +76,26 @@ export default function SleepVideosPage() {
     } else {
       params.set("slot", choice.value);
     }
+    if (hostParam === "standard") {
+      params.set("host", "standard");
+    }
     return `${pathname}?${params.toString()}`;
   };
+
+  const alternateHostHref = (() => {
+    const params = new URLSearchParams();
+    if (selectedChoice.type === "video") {
+      params.set("video", selectedChoice.value);
+    } else {
+      params.set("slot", selectedChoice.value);
+    }
+    if (hostParam === "standard") {
+      params.delete("host");
+    } else {
+      params.set("host", "standard");
+    }
+    return `${pathname}?${params.toString()}`;
+  })();
 
   return (
     <main className="min-h-screen bg-(--sv-bg) px-4 py-8 text-(--sv-text) sm:px-6 sm:py-10">
@@ -77,25 +113,19 @@ export default function SleepVideosPage() {
         </header>
 
         <h1 className="mb-2 text-2xl font-semibold tracking-tight sm:text-3xl">
-          Bedtime Video Library
+          ASMR For my Clubbers
         </h1>
         <p className="mb-8 text-sm text-(--sv-muted) sm:text-base">
           All uploads from {CHANNEL_HANDLE}, in one focused view.
         </p>
 
         <article className="mb-8 overflow-hidden rounded-xl border border-(--sv-border) bg-(--sv-surface)">
-          <div className="aspect-video bg-(--sv-surface-soft)">
-            <iframe
-              className="h-full w-full"
-              key={`${selectedChoice.type}-${selectedChoice.value}`}
-              src={embedSrc}
-              title={`${CHANNEL_HANDLE} selected video`}
-              loading="eager"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allow="autoplay; encrypted-media; picture-in-picture; web-share"
-              allowFullScreen
-            />
-          </div>
+          <VideoEmbedFrame
+            key={embedKey}
+            src={embedSrc}
+            title={`${CHANNEL_HANDLE} selected video`}
+            alternateHostHref={alternateHostHref}
+          />
         </article>
 
         <section>
@@ -131,5 +161,77 @@ export default function SleepVideosPage() {
         </section>
       </div>
     </main>
+  );
+}
+
+function VideoEmbedFrame({
+  src,
+  title,
+  alternateHostHref,
+}: Readonly<{
+  src: string;
+  title: string;
+  alternateHostHref: string;
+}>) {
+  const [isLoading, setIsLoading] = useState(true);
+  const [didTimeout, setDidTimeout] = useState(false);
+
+  useEffect(() => {
+    const timeout = window.setTimeout(() => {
+      setDidTimeout(true);
+      setIsLoading(false);
+    }, 8000);
+
+    return () => {
+      window.clearTimeout(timeout);
+    };
+  }, []);
+
+  return (
+    <>
+      <div className="relative aspect-video bg-(--sv-surface-soft)">
+        {isLoading ? (
+          <div className="absolute inset-0 z-10 grid place-items-center bg-(--sv-surface-soft)/80">
+            <p className="px-4 text-center text-sm font-medium text-(--sv-muted)">
+              Loading player...
+            </p>
+          </div>
+        ) : null}
+        <iframe
+          className="h-full w-full"
+          src={src}
+          title={title}
+          loading="eager"
+          referrerPolicy="strict-origin-when-cross-origin"
+          allow="autoplay; encrypted-media; picture-in-picture; web-share"
+          allowFullScreen
+          onLoad={() => {
+            setIsLoading(false);
+            setDidTimeout(false);
+          }}
+        />
+      </div>
+
+      {didTimeout ? (
+        <div className="border-t border-(--sv-border) p-4">
+          <p className="text-sm font-semibold text-(--sv-text)">
+            The player did not load on this network/device.
+          </p>
+          <p className="mt-1 text-xs text-(--sv-muted)">
+            Try the alternate embed host. This often fixes mobile blank-player
+            issues.
+          </p>
+          <button
+            type="button"
+            onClick={() => {
+              window.location.assign(alternateHostHref);
+            }}
+            className="mt-3 rounded-lg border border-(--sv-accent) bg-(--sv-surface-soft) px-3 py-2 text-sm font-semibold text-(--sv-text)"
+          >
+            Try alternate player host
+          </button>
+        </div>
+      ) : null}
+    </>
   );
 }
