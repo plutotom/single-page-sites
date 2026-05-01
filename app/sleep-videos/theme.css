@@ -1,0 +1,9 @@
+.sleep-videos-theme {
+  --sv-bg: #07080d;
+  --sv-surface: #11131a;
+  --sv-surface-soft: #171a24;
+  --sv-border: rgba(255, 255, 255, 0.12);
+  --sv-text: #f3f5f8;
+  --sv-muted: #a7afbd;
+  --sv-accent: #8aa2ff;
+}
