@@ -47,7 +47,13 @@ export default async function Home() {
             href="/spotify-wrapped-poc"
             className="font-medium text-zinc-950 underline decoration-zinc-300 underline-offset-2 hover:decoration-zinc-500 dark:text-zinc-50 dark:decoration-zinc-600 dark:hover:decoration-zinc-400"
           >
-            Spotify Wrapped POC
+            Weekly recap (simple)
+          </Link>
+          <Link
+            href="/weekly-recap-v1"
+            className="font-medium text-zinc-950 underline decoration-zinc-300 underline-offset-2 hover:decoration-zinc-500 dark:text-zinc-50 dark:decoration-zinc-600 dark:hover:decoration-zinc-400"
+          >
+            Weekly recap v1 (full variables)
           </Link>
         </nav>
       </main>

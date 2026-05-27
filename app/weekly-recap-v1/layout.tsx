@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { DM_Sans } from "next/font/google";
-import "./theme.css";
+import "../spotify-wrapped-poc/theme.css";
 
 const wrappedFont = DM_Sans({
   variable: "--font-wrapped-app",
@@ -10,9 +10,9 @@ const wrappedFont = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Weekly Recovery Recap",
+  title: "Weekly Recap v1",
   description:
-    "A proof-of-concept week-in-review for streaks, triggers, patterns, and protective factors.",
+    "Full-variable weekly recovery recap — compare with the simplified wrapped POC.",
 };
 
 export const viewport: Viewport = {
@@ -20,7 +20,7 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export default function SpotifyWrappedPocLayout({
+export default function WeeklyRecapV1Layout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -31,4 +31,3 @@ export default function SpotifyWrappedPocLayout({
     </div>
   );
 }
-
