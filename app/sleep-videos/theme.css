@@ -6,4 +6,16 @@
   --sv-text: #f3f5f8;
   --sv-muted: #a7afbd;
   --sv-accent: #8aa2ff;
+  --sv-birthday-bg: linear-gradient(
+    135deg,
+    rgba(138, 162, 255, 0.14) 0%,
+    rgba(111, 86, 168, 0.1) 50%,
+    rgba(138, 162, 255, 0.08) 100%
+  );
+  --sv-birthday-border: rgba(186, 168, 255, 0.35);
+  --sv-birthday-icon-bg: rgba(138, 162, 255, 0.2);
+}
+
+.sleep-videos-theme .birthday-card {
+  background: var(--sv-birthday-bg);
 }
