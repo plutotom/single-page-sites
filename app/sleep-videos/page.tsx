@@ -10,11 +10,12 @@ const CHANNEL_ID = "UC_ARaeDGHVLAqi6whEWQRTg";
 const UPLOADS_PLAYLIST_ID = `UU${CHANNEL_ID.slice(2)}`;
 const VIDEO_CHOICES = [
   { label: "Latest upload", type: "playlist", value: "1" },
-  { label: "Selected video 1", type: "video", value: "Z7YtrS_6t9k" },
-  { label: "Selected video 2", type: "video", value: "aBQ7i42DAzo" },
-  { label: "Selected video 3", type: "video", value: "U5DNh3Zb-bE" },
-  { label: "Selected video 4", type: "video", value: "moW14bJ9Vgg" },
-  { label: "Selected video 5", type: "video", value: "sDkwiFJkQ9Q" },
+  { label: "Personal Attention for Sleep", type: "video", value: "nNwSrW4pd10" },
+  { label: "The Midnight Spa", type: "video", value: "MQLu8jUHNQ4" },
+  { label: "Gently Helping You Sleep", type: "video", value: "YoBGiCJn50A" },
+  { label: "Rainstorm Layered Sounds", type: "video", value: "z2S3zmLmdy8" },
+  { label: "Pampering You To Sleep", type: "video", value: "A7mUyPxPvGo" },
+  { label: "In The Dark", type: "video", value: "IGYL6R9gcMA" },
 ] as const;
 
 export default function SleepVideosPage() {
