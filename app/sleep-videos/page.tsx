@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Suspense, useEffect, useMemo, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
+import BirthdayCard from "./BirthdayCard";
 
 const CHANNEL_HANDLE = "@OzleyASMR";
 const CHANNEL_ID = "UC_ARaeDGHVLAqi6whEWQRTg";
@@ -111,6 +112,8 @@ function SleepVideosClientPage() {
             Sleep videos
           </p>
         </header>
+
+        <BirthdayCard />
 
         <h1 className="mb-2 text-2xl font-semibold tracking-tight sm:text-3xl">
           ASMR For my Clubbers
