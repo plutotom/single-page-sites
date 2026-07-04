@@ -1,0 +1,51 @@
+name: Update ASMR videos
+
+on:
+  schedule:
+    # Mondays at 14:00 UTC
+    - cron: "0 14 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Refresh Ozley ASMR video picks
+        run: pnpm run update:asmr-videos
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add app/sleep-videos/videos.json
+          if git diff --staged --quiet; then
+            echo "No video changes to commit."
+            exit 0
+          fi
+          git commit -m "$(cat <<'EOF'
+chore: refresh Ozley ASMR sleep video picks
+
+Weekly sync from the channel RSS feed.
+EOF
+)"
+          git push

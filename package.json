@@ -6,7 +6,8 @@
     "dev": "next dev --port 4224",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "update:asmr-videos": "node scripts/update-asmr-videos.mjs"
   },
   "dependencies": {
     "next": "16.1.6",

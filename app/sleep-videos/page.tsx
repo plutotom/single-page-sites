@@ -4,19 +4,14 @@ import Link from "next/link";
 import { Suspense, useEffect, useMemo, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import BirthdayCard from "./BirthdayCard";
+import {
+  CHANNEL_HANDLE,
+  UPLOADS_PLAYLIST_ID,
+  type VideoChoice,
+} from "./channel";
+import videoData from "./videos.json";
 
-const CHANNEL_HANDLE = "@OzleyASMR";
-const CHANNEL_ID = "UC_ARaeDGHVLAqi6whEWQRTg";
-const UPLOADS_PLAYLIST_ID = `UU${CHANNEL_ID.slice(2)}`;
-const VIDEO_CHOICES = [
-  { label: "Latest upload", type: "playlist", value: "1" },
-  { label: "Personal Attention for Sleep", type: "video", value: "nNwSrW4pd10" },
-  { label: "The Midnight Spa", type: "video", value: "MQLu8jUHNQ4" },
-  { label: "Gently Helping You Sleep", type: "video", value: "YoBGiCJn50A" },
-  { label: "Rainstorm Layered Sounds", type: "video", value: "z2S3zmLmdy8" },
-  { label: "Pampering You To Sleep", type: "video", value: "A7mUyPxPvGo" },
-  { label: "In The Dark", type: "video", value: "IGYL6R9gcMA" },
-] as const;
+const VIDEO_CHOICES = videoData.choices as VideoChoice[];
 
 export default function SleepVideosPage() {
   return (
@@ -43,7 +38,7 @@ function SleepVideosClientPage() {
   const embedHost =
     hostParam === "standard" ? "www.youtube.com" : "www.youtube-nocookie.com";
 
-  const selectedChoice = useMemo<(typeof VIDEO_CHOICES)[number]>(() => {
+  const selectedChoice = useMemo<VideoChoice>(() => {
     if (videoParam) {
       const matchedVideo = VIDEO_CHOICES.find(
         (choice) => choice.type === "video" && choice.value === videoParam,
@@ -71,7 +66,7 @@ function SleepVideosClientPage() {
   }, [embedHost, selectedChoice]);
   const embedKey = `${embedHost}-${selectedChoice.type}-${selectedChoice.value}`;
 
-  const choiceToHref = (choice: (typeof VIDEO_CHOICES)[number]): string => {
+  const choiceToHref = (choice: VideoChoice): string => {
     const params = new URLSearchParams();
     if (choice.type === "video") {
       params.set("video", choice.value);
@@ -114,7 +109,7 @@ function SleepVideosClientPage() {
           </p>
         </header>
 
-        <BirthdayCard />
+        {/* <BirthdayCard /> */}
 
         <h1 className="mb-2 text-2xl font-semibold tracking-tight sm:text-3xl">
           ASMR For my Clubbers
