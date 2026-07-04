@@ -42,10 +42,5 @@ jobs:
             echo "No video changes to commit."
             exit 0
           fi
-          git commit -m "$(cat <<'EOF'
-chore: refresh Ozley ASMR sleep video picks
-
-Weekly sync from the channel RSS feed.
-EOF
-)"
+          git commit -m "chore: refresh Ozley ASMR sleep video picks" -m "Weekly sync from the channel RSS feed."
           git push
