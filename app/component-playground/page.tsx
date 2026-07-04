@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { PillLayoutExplorer } from "./pill-layout-explorer";
 import type { CSSProperties } from "react";
 import { useMemo, useRef, useState } from "react";
 
@@ -30,7 +31,7 @@ const formPages = [
     id: "mood",
     eyebrow: "Check-in 01",
     question: "What are you doing?",
-    helper: "Pill + create-new input",
+    helper: "Pill layout variants — tap tabs to compare",
   },
   {
     id: "rest",
@@ -113,20 +114,6 @@ type PlaygroundStyle = CSSProperties & {
 export default function ComponentPlaygroundPage() {
   const [accent, setAccent] = useState<Accent>(accentOptions[0]);
   const [pageIndex, setPageIndex] = useState(0);
-  const [activityPills, setActivityPills] = useState([
-    "Hanging Out",
-    "School work",
-    "Work",
-    "Lifting",
-    "Driving",
-    "Resting",
-    "Coding work",
-    "Hobbies",
-    "Fitness",
-  ]);
-  const [selectedActivity, setSelectedActivity] = useState<string | null>(null);
-  const [isCreatingActivity, setIsCreatingActivity] = useState(false);
-  const [newActivityLabel, setNewActivityLabel] = useState("");
   const [sliderA, setSliderA] = useState(3);
   const [sliderB, setSliderB] = useState(5);
   const [sliderC, setSliderC] = useState(6);
@@ -160,7 +147,7 @@ export default function ComponentPlaygroundPage() {
   return (
     <main style={playgroundStyle}>
       <div className="mx-auto flex min-h-screen w-full max-w-[430px] bg-black sm:items-center sm:justify-center sm:p-4">
-        <section className="component-playground-phone relative flex w-full flex-col overflow-hidden sm:rounded-[2.2rem]">
+        <section className="component-playground-phone relative flex w-full min-h-0 flex-col overflow-x-hidden sm:rounded-[2.2rem]">
           <StatusBar />
 
           <header className="flex items-center justify-between border-b border-(--cp-line) bg-(--cp-bg-deep)/80 px-5 py-4 backdrop-blur-xl">
@@ -182,7 +169,7 @@ export default function ComponentPlaygroundPage() {
             </button>
           </header>
 
-          <div className="flex flex-1 flex-col px-5 pb-7 pt-5">
+          <div className="flex min-h-0 flex-1 flex-col px-5 pb-7 pt-5">
             <ControlRow label="Accent">
               {accentOptions.map((item) => (
                 <button
@@ -208,7 +195,7 @@ export default function ComponentPlaygroundPage() {
 
             <section
               key={currentPage.id}
-              className="component-playground-form-page flex flex-1 flex-col"
+              className="component-playground-form-page flex min-h-0 flex-1 flex-col overflow-hidden"
               aria-labelledby="test-form-question"
             >
               <div className="flex items-center justify-between pt-8">
@@ -220,49 +207,32 @@ export default function ComponentPlaygroundPage() {
                 </p>
               </div>
 
-              <div className="flex flex-1 flex-col justify-center pb-20 text-center">
-                <p className="mx-auto mb-8 max-w-64 text-[0.82rem] font-extrabold uppercase tracking-[0.18em] text-(--cp-accent-strong)">
-                  Test progression only
-                </p>
-                <h2
-                  id="test-form-question"
-                  className="mx-auto max-w-80 text-[2.25rem] font-extrabold leading-[1.06] tracking-[-0.07em] text-(--cp-cream)"
-                >
-                  {currentPage.question}
-                </h2>
+              <div
+                className={`flex min-h-0 flex-1 flex-col ${
+                  currentPage.id === "mood"
+                    ? "justify-start overflow-y-auto overscroll-y-contain pt-2 pb-6 text-left"
+                    : "justify-center pb-20 text-center"
+                }`}
+              >
+                {currentPage.id !== "mood" ? (
+                  <>
+                    <p className="mx-auto mb-8 max-w-64 text-[0.82rem] font-extrabold uppercase tracking-[0.18em] text-(--cp-accent-strong)">
+                      Test progression only
+                    </p>
+                    <h2
+                      id="test-form-question"
+                      className="mx-auto max-w-80 text-[2.25rem] font-extrabold leading-[1.06] tracking-[-0.07em] text-(--cp-cream)"
+                    >
+                      {currentPage.question}
+                    </h2>
+                  </>
+                ) : (
+                  <h2 id="test-form-question" className="sr-only">
+                    {currentPage.question}
+                  </h2>
+                )}
                 {currentPage.id === "mood" ? (
-                  <PillCreateInput
-                    options={activityPills}
-                    selected={selectedActivity}
-                    isCreating={isCreatingActivity}
-                    newValue={newActivityLabel}
-                    onSelect={(value) => {
-                      setSelectedActivity(value);
-                      setIsCreatingActivity(false);
-                    }}
-                    onStartCreate={() => {
-                      setSelectedActivity(null);
-                      setIsCreatingActivity(true);
-                    }}
-                    onCreateChange={setNewActivityLabel}
-                    onCreateSubmit={() => {
-                      const normalized = newActivityLabel.trim();
-                      if (!normalized) return;
-                      const alreadyExists = activityPills.some(
-                        (item) => item.toLowerCase() === normalized.toLowerCase(),
-                      );
-                      if (!alreadyExists) {
-                        setActivityPills((existing) => [...existing, normalized]);
-                      }
-                      setSelectedActivity(normalized);
-                      setNewActivityLabel("");
-                      setIsCreatingActivity(false);
-                    }}
-                    onCancelCreate={() => {
-                      setNewActivityLabel("");
-                      setIsCreatingActivity(false);
-                    }}
-                  />
+                  <PillLayoutExplorer />
                 ) : currentPage.id === "rest" ? (
                   <SliderShowcase
                     sliderA={sliderA}
