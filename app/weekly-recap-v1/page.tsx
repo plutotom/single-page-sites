@@ -430,21 +430,6 @@ function RankedSection({
   );
 }
 
-function ChipList({ title, items }: Readonly<{ title: string; items: string[] }>) {
-  return (
-    <div className="px-1">
-      <SectionLabel>{title}</SectionLabel>
-      <ul className="mt-2 flex flex-wrap gap-2">
-        {items.map((item) => (
-          <li key={item} className="wrapped-chip text-[0.7rem] normal-case tracking-normal">
-            {item}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
 function formatDelta(value: number, decimal = false): string {
   if (value === 0) return "No change";
   const sign = value > 0 ? "+" : "";

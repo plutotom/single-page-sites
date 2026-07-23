@@ -451,6 +451,38 @@ function OptionsSheet({
   selected: string[];
   onToggle: (value: string) => void;
 }>) {
+  if (!open) return null;
+
+  return (
+    <OptionsSheetPanel
+      onClose={onClose}
+      sheetId={sheetId}
+      title={title}
+      subtitle={subtitle}
+      options={options}
+      selected={selected}
+      onToggle={onToggle}
+    />
+  );
+}
+
+function OptionsSheetPanel({
+  onClose,
+  sheetId,
+  title,
+  subtitle,
+  options,
+  selected,
+  onToggle,
+}: Readonly<{
+  onClose: () => void;
+  sheetId: string;
+  title: string;
+  subtitle: string;
+  options: readonly string[];
+  selected: string[];
+  onToggle: (value: string) => void;
+}>) {
   const [query, setQuery] = useState("");
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
@@ -461,19 +493,13 @@ function OptionsSheet({
     : options;
 
   useEffect(() => {
-    if (!open) {
-      setQuery("");
-      return;
-    }
     closeButtonRef.current?.focus();
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") onClose();
     };
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
-  }, [open, onClose]);
-
-  if (!open) return null;
+  }, [onClose]);
 
   return (
     <div className="pill-explorer-sheet-root" role="presentation">

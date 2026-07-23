@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { Suspense, useEffect, useMemo, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
-import BirthdayCard from "./BirthdayCard";
 import {
   CHANNEL_HANDLE,
   UPLOADS_PLAYLIST_ID,
