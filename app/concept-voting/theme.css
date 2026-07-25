@@ -305,9 +305,6 @@
 }
 
 .concept-voting-vote-wrap {
-  position: sticky;
-  top: calc(12px + var(--cv-safe-top));
-  z-index: 30;
   max-width: 520px;
   margin: 22px auto 0;
   padding: 16px;
@@ -318,7 +315,6 @@
   box-shadow:
     0 18px 50px -24px rgba(0, 0, 0, 0.95),
     0 0 0 1px rgba(143, 182, 255, 0.08);
-  backdrop-filter: blur(10px);
 }
 
 .concept-voting-vote-wrap[data-locked="true"] {
