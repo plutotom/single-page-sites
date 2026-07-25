@@ -1,0 +1,569 @@
+<style>
+  :host{
+    --bg-0:#050608;
+    --bg-1:#0a0e14;
+    --phone-bg-top:#0a0d13;
+    --phone-bg-bot:#05070a;
+    --card:#10141c;
+    --card-border:rgba(255,255,255,0.07);
+    --ink-primary:#f4f5f7;
+    --ink-secondary:#a9b0bd;
+    --ink-muted:#6b7280;
+    --ring-deep:#173a72;
+    --ring-mid:#3987e5;
+    --ring-glow:#a9d0fb;
+    --accent-soft:rgba(57,135,229,0.14);
+    --divider:rgba(255,255,255,0.08);
+  }
+
+  *{ box-sizing:border-box; }
+
+  :host,:host{
+    margin:0;
+    padding:0;
+    min-height:100%;
+    background:
+      radial-gradient(60% 50% at 50% 0%, #0d1a2e 0%, transparent 60%),
+      radial-gradient(50% 40% at 85% 90%, #14101f 0%, transparent 60%),
+      var(--bg-0);
+    font-family:'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color:var(--ink-primary);
+  }
+
+  .gallery{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:28px;
+    padding:56px 20px;
+  }
+
+  /* ---------- phone frame ---------- */
+  .device{
+    position:relative;
+    width:390px;
+    height:844px;
+    border-radius:56px;
+    padding:14px;
+    background:linear-gradient(160deg,#2b2d33 0%, #121317 45%, #1b1c20 100%);
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.04) inset,
+      0 30px 80px -20px rgba(0,0,0,0.75),
+      0 10px 30px -8px rgba(0,0,0,0.6);
+    flex-shrink:0;
+  }
+
+  .screen{
+    position:relative;
+    width:100%;
+    height:100%;
+    border-radius:42px;
+    overflow:hidden;
+    background:linear-gradient(180deg, var(--phone-bg-top) 0%, var(--phone-bg-bot) 70%);
+    display:flex;
+    flex-direction:column;
+  }
+
+  .notch{
+    position:absolute;
+    top:10px;
+    left:50%;
+    transform:translateX(-50%);
+    width:120px;
+    height:28px;
+    background:#000;
+    border-radius:20px;
+    z-index:20;
+  }
+
+  /* ---------- status bar ---------- */
+  .statusbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:18px 28px 4px;
+    font-family:'Inter', -apple-system, sans-serif;
+    font-size:15px;
+    font-weight:600;
+    color:var(--ink-primary);
+    flex-shrink:0;
+  }
+  .statusbar .icons{ display:flex; align-items:center; gap:6px; }
+
+  /* ---------- app top bar ---------- */
+  .topbar{
+    padding:14px 24px 6px;
+    flex-shrink:0;
+  }
+  .topbar .eyebrow{
+    font-size:12px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--ink-muted);
+    font-weight:600;
+    margin:0 0 4px;
+  }
+  .topbar .title-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .topbar h1{
+    font-family:'Sora', -apple-system, 'Segoe UI', sans-serif;
+    font-weight:600;
+    font-size:22px;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  .gear{
+    width:34px;
+    height:34px;
+    border-radius:12px;
+    background:rgba(255,255,255,0.05);
+    border:1px solid var(--card-border);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  /* ---------- scroll content ---------- */
+  .content{
+    flex:1;
+    overflow-y:auto;
+    padding:6px 20px 28px;
+    -ms-overflow-style:none;
+    scrollbar-width:none;
+  }
+  .content::-webkit-scrollbar{ display:none; }
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;
+    margin:8px 2px 22px;
+    padding:26px 18px 22px;
+    border-radius:28px;
+    background:linear-gradient(165deg, rgba(57,135,229,0.10) 0%, rgba(255,255,255,0.015) 55%, rgba(255,255,255,0.01) 100%);
+    border:1px solid var(--card-border);
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+  }
+  .hero-glow-blob{
+    position:absolute;
+    width:260px;
+    height:260px;
+    top:-120px;
+    left:50%;
+    transform:translateX(-50%);
+    background:radial-gradient(circle, rgba(57,135,229,0.35) 0%, rgba(57,135,229,0) 68%);
+    filter:blur(6px);
+    pointer-events:none;
+  }
+
+  .ring-wrap{ position:relative; width:212px; height:212px; margin-bottom:2px; }
+  .ring-wrap svg{ width:100%; height:100%; display:block; }
+  .ring-center{
+    position:absolute;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:2px;
+  }
+  .ring-number{
+    font-family:'Sora', -apple-system, 'Segoe UI', sans-serif;
+    font-weight:300;
+    font-size:56px;
+    line-height:1;
+    letter-spacing:-0.02em;
+    color:var(--ink-primary);
+    font-variant-numeric:proportional-nums;
+  }
+  .ring-number sup{
+    font-size:22px;
+    font-weight:400;
+    margin-left:2px;
+    color:var(--ink-secondary);
+  }
+  .ring-name{
+    font-size:13px;
+    font-weight:600;
+    color:#bcd6f7;
+    letter-spacing:0.01em;
+  }
+
+  .hero-sentence{
+    position:relative;
+    max-width:270px;
+    font-size:14.5px;
+    line-height:1.5;
+    color:var(--ink-secondary);
+    margin:10px 0 2px;
+  }
+  .hero-sentence b{ color:var(--ink-primary); font-weight:600; }
+
+  .hero-caveat{
+    position:relative;
+    font-size:11.5px;
+    color:var(--ink-muted);
+    margin-top:10px;
+  }
+
+  /* ---------- dot history ---------- */
+  .history{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:2px 4px 20px;
+  }
+  .history-label{
+    font-size:11.5px;
+    color:var(--ink-muted);
+    font-weight:500;
+  }
+  .history-dots{ display:flex; gap:7px; }
+  .hdot{ width:11px; height:11px; border-radius:50%; }
+  .hdot.held{ background:var(--ring-mid); box-shadow:0 0 8px rgba(57,135,229,0.55); }
+  .hdot.through{ background:transparent; border:1.5px solid rgba(169,176,189,0.55); }
+  .history-key{
+    display:flex;
+    gap:12px;
+    font-size:11px;
+    color:var(--ink-muted);
+  }
+  .history-key span{ display:inline-flex; align-items:center; gap:5px; }
+  .key-dot{ width:8px; height:8px; border-radius:50%; display:inline-block; }
+  .key-dot.held{ background:var(--ring-mid); }
+  .key-dot.through{ background:transparent; border:1.5px solid rgba(169,176,189,0.55); }
+
+  /* ---------- section header ---------- */
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    margin:6px 2px 12px;
+  }
+  .section-head h2{
+    font-family:'Sora', -apple-system, 'Segoe UI', sans-serif;
+    font-size:16px;
+    font-weight:600;
+    margin:0;
+    letter-spacing:-0.005em;
+  }
+  .section-head .count{
+    font-size:12.5px;
+    color:var(--ink-muted);
+  }
+
+  /* ---------- gate cards ---------- */
+  .gate{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    padding:14px 14px;
+    border-radius:18px;
+    background:var(--card);
+    border:1px solid var(--card-border);
+    margin-bottom:10px;
+  }
+  .gate.off{ opacity:0.55; }
+  .gate-icon{
+    width:40px;
+    height:40px;
+    flex-shrink:0;
+    border-radius:12px;
+    background:var(--accent-soft);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .gate.off .gate-icon{ background:rgba(255,255,255,0.05); }
+  .gate-body{ flex:1; min-width:0; }
+  .gate-title{
+    font-size:14.5px;
+    font-weight:600;
+    color:var(--ink-primary);
+    margin:0 0 2px;
+  }
+  .gate-sub{
+    font-size:12.5px;
+    color:var(--ink-muted);
+    margin:0;
+    line-height:1.4;
+  }
+  .toggle{
+    width:44px;
+    height:26px;
+    border-radius:999px;
+    background:rgba(57,135,229,0.9);
+    flex-shrink:0;
+    position:relative;
+    box-shadow:0 0 10px rgba(57,135,229,0.35);
+  }
+  .toggle.off{ background:rgba(255,255,255,0.12); box-shadow:none; }
+  .toggle::after{
+    content:'';
+    position:absolute;
+    top:3px;
+    right:3px;
+    width:20px;
+    height:20px;
+    border-radius:50%;
+    background:#fff;
+  }
+  .toggle.off::after{ right:auto; left:3px; background:#9aa0ab; }
+
+  /* ---------- add gate ---------- */
+  .add-gate{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    padding:15px;
+    border-radius:18px;
+    border:1.5px dashed rgba(169,176,189,0.3);
+    color:var(--ink-secondary);
+    font-size:14px;
+    font-weight:600;
+    margin:4px 0 22px;
+  }
+
+  /* ---------- footnote ---------- */
+  .footnote{
+    display:flex;
+    gap:10px;
+    padding:14px 14px;
+    border-radius:16px;
+    background:rgba(255,255,255,0.03);
+    border:1px solid var(--card-border);
+    margin-bottom:10px;
+  }
+  .footnote p{
+    margin:0;
+    font-size:12px;
+    line-height:1.55;
+    color:var(--ink-muted);
+  }
+  .footnote b{ color:var(--ink-secondary); font-weight:600; }
+
+  .home-indicator{
+    flex-shrink:0;
+    display:flex;
+    justify-content:center;
+    padding:8px 0 6px;
+  }
+  .home-indicator .bar{
+    width:134px;
+    height:5px;
+    border-radius:3px;
+    background:rgba(255,255,255,0.55);
+  }
+
+  /* ---------- caption ---------- */
+  .caption{
+    text-align:center;
+    max-width:420px;
+  }
+  .caption .name-row{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    margin-bottom:8px;
+    flex-wrap:wrap;
+  }
+  .caption .concept-name{
+    font-family:'Sora', -apple-system, 'Segoe UI', sans-serif;
+    font-size:19px;
+    font-weight:600;
+    color:var(--ink-primary);
+  }
+  .caption .vibe-tag{
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:#bcd6f7;
+    background:rgba(57,135,229,0.14);
+    border:1px solid rgba(57,135,229,0.3);
+    padding:4px 10px;
+    border-radius:999px;
+  }
+  .caption p{
+    font-size:13.5px;
+    line-height:1.55;
+    color:var(--ink-secondary);
+    margin:0;
+  }
+</style>
+  <div class="gallery">
+
+    <div class="device">
+      <div class="screen">
+        <div class="notch"></div>
+
+        <!-- OS status bar -->
+        <div class="statusbar">
+          <span>9:41</span>
+          <span class="icons">
+            <svg width="18" height="12" viewBox="0 0 18 12" fill="none"><rect x="0" y="7" width="3" height="5" rx="0.5" fill="#f4f5f7"/><rect x="5" y="5" width="3" height="7" rx="0.5" fill="#f4f5f7"/><rect x="10" y="2" width="3" height="10" rx="0.5" fill="#f4f5f7"/><rect x="15" y="0" width="3" height="12" rx="0.5" fill="#f4f5f7"/></svg>
+            <svg width="24" height="12" viewBox="0 0 24 12" fill="none"><rect x="1" y="1" width="19" height="10" rx="2.5" stroke="#f4f5f7" stroke-width="1"/><rect x="2.5" y="2.5" width="14" height="7" rx="1.2" fill="#f4f5f7"/><rect x="21.5" y="4" width="1.5" height="4" rx="0.7" fill="#f4f5f7"/></svg>
+          </span>
+        </div>
+
+        <!-- app top bar -->
+        <div class="topbar">
+          <div class="title-row">
+            <div>
+              <p class="eyebrow">Your environment</p>
+              <h1>Gates</h1>
+            </div>
+            <div class="gear">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#c3c2b7" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- scrollable content -->
+        <div class="content">
+
+          <!-- HERO -->
+          <div class="hero">
+            <div class="hero-glow-blob"></div>
+
+            <div class="ring-wrap">
+              <svg viewBox="0 0 220 220">
+                <defs>
+                  <linearGradient id="ringGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#173a72"/>
+                    <stop offset="55%" stop-color="#3987e5"/>
+                    <stop offset="100%" stop-color="#bcd9fb"/>
+                  </linearGradient>
+                  <filter id="ringBlur" x="-60%" y="-60%" width="220%" height="220%">
+                    <feGaussianBlur stdDeviation="7" result="blur"/>
+                  </filter>
+                </defs>
+
+                <!-- track -->
+                <circle cx="110" cy="110" r="84" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="14"/>
+
+                <!-- glow duplicate -->
+                <g transform="rotate(-90 110 110)">
+                  <circle cx="110" cy="110" r="84" fill="none" stroke="url(#ringGrad)" stroke-width="20"
+                    stroke-linecap="round" stroke-dasharray="390.6 527.9" opacity="0.45" filter="url(#ringBlur)"/>
+                </g>
+
+                <!-- crisp progress arc -->
+                <g transform="rotate(-90 110 110)">
+                  <circle cx="110" cy="110" r="84" fill="none" stroke="url(#ringGrad)" stroke-width="13"
+                    stroke-linecap="round" stroke-dasharray="390.6 527.9"/>
+                </g>
+
+                <!-- leading tip highlight dot -->
+                <circle cx="110" cy="26" r="5.5" fill="#eaf2fd"/>
+              </svg>
+
+              <div class="ring-center">
+                <div class="ring-number">74<sup>%</sup></div>
+                <div class="ring-name">Pause yield</div>
+              </div>
+            </div>
+
+            <p class="hero-sentence">
+              Out of <b>19 gates</b> this month, the pause you built was <b>enough 14 times</b>.
+            </p>
+            <p class="hero-caveat">Based on your gates over the last 30 days · just yours, no one else's</p>
+          </div>
+
+          <!-- DOT HISTORY -->
+          <div class="history">
+            <div>
+              <div class="history-label" style="margin-bottom:8px;">Last 8 times a gate opened</div>
+              <div class="history-dots">
+                <span class="hdot held"></span>
+                <span class="hdot held"></span>
+                <span class="hdot through"></span>
+                <span class="hdot held"></span>
+                <span class="hdot held"></span>
+                <span class="hdot held"></span>
+                <span class="hdot through"></span>
+                <span class="hdot held"></span>
+              </div>
+            </div>
+          </div>
+          <div class="history-key" style="margin:-8px 4px 22px;">
+            <span><i class="key-dot held"></i>pause held</span>
+            <span><i class="key-dot through"></i>moved through — your call</span>
+          </div>
+
+          <!-- YOUR GATES -->
+          <div class="section-head">
+            <h2>Your gates</h2>
+            <span class="count">2 active · 1 off</span>
+          </div>
+
+          <div class="gate">
+            <div class="gate-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9ec5f4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+            </div>
+            <div class="gate-body">
+              <p class="gate-title">Evening lock</p>
+              <p class="gate-sub">9:00 pm – 7:00 am · adds a 90-second pause before certain apps open</p>
+            </div>
+            <div class="toggle"></div>
+          </div>
+
+          <div class="gate">
+            <div class="gate-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9ec5f4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h10M4 17h13"/></svg>
+            </div>
+            <div class="gate-body">
+              <p class="gate-title">Write one line first</p>
+              <p class="gate-sub">Asks what you're looking for before certain sites load — no wrong answer</p>
+            </div>
+            <div class="toggle"></div>
+          </div>
+
+          <div class="gate off">
+            <div class="gate-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9aa0ab" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+            </div>
+            <div class="gate-body">
+              <p class="gate-title">New device check</p>
+              <p class="gate-sub">Needs a code from someone you chose · off for now</p>
+            </div>
+            <div class="toggle off"></div>
+          </div>
+
+          <div class="add-gate">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#a9b0bd" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+            Add a gate
+          </div>
+
+          <div class="footnote">
+            <div>
+              <p><b>You built these, you can change them.</b> Turning a gate off doesn't erase anything above — there's no streak here to lose, just a setup you're allowed to adjust as your life does.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="home-indicator"><div class="bar"></div></div>
+      </div>
+    </div>
+
+    <div class="caption">
+      <div class="name-row">
+        <span class="concept-name">Gates — the environment layer</span>
+        <span class="vibe-tag">Quiet control</span>
+      </div>
+      <p>Turns self-chosen friction into visible, editable infrastructure — the app names what the delay is already doing ("pause yield") so the user discovers their own engineering is working, instead of being told to try harder or being policed by the app.</p>
+    </div>
+
+  </div>
+<style>:host{width:432px!important;height:886px!important;min-height:0!important;padding:0!important;margin:0!important;display:block!important;overflow:hidden!important}.side-btn{display:none!important}</style>

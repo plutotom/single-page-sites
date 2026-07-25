@@ -1,0 +1,545 @@
+<style>
+  :host{
+    --bg-0:#040509;
+    --bg-1:#0a0d18;
+    --panel:#0d101c;
+    --panel-line: rgba(255,255,255,0.07);
+    --ink-hi: rgba(245,247,255,0.96);
+    --ink-mid: rgba(224,228,245,0.72);
+    --ink-lo: rgba(200,206,230,0.42);
+    --ink-xlo: rgba(200,206,230,0.28);
+    --teal: #6fe3c9;
+    --violet: #a78bfa;
+    --glow: #7dd6d1;
+    --font-display: 'Sora', -apple-system, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    --font-body: 'Inter', -apple-system, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  *{ box-sizing: border-box; }
+
+  :host, :host{
+    margin:0;
+    padding:0;
+    min-height:100%;
+    background: var(--bg-0);
+    font-family: var(--font-body);
+  }
+
+  :host{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    min-height:100vh;
+    padding: 48px 20px 40px;
+    background:
+      radial-gradient(60% 50% at 50% 0%, rgba(111,227,201,0.10), transparent 60%),
+      radial-gradient(70% 60% at 80% 100%, rgba(167,139,250,0.08), transparent 60%),
+      var(--bg-0);
+  }
+
+  /* ---------- gallery chrome ---------- */
+
+  .stage{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap: 28px;
+  }
+
+  .device-shell{
+    position:relative;
+    width: 390px;
+    max-width: 92vw;
+  }
+
+  .phone-frame{
+    position:relative;
+    width:100%;
+    aspect-ratio: 390 / 844;
+    border-radius: 54px;
+    padding: 14px;
+    background:
+      linear-gradient(155deg, #2a2d38 0%, #14151c 38%, #0a0a0e 100%);
+    box-shadow:
+      0 60px 120px -40px rgba(0,0,0,0.85),
+      0 20px 45px -20px rgba(0,0,0,0.7),
+      inset 0 0 0 1px rgba(255,255,255,0.06);
+  }
+
+  .phone-frame::before{
+    /* faux buttons */
+    content:"";
+    position:absolute;
+    left:-3px; top: 128px;
+    width:3px; height:56px;
+    background: linear-gradient(180deg,#3a3d48,#111319);
+    border-radius: 2px 0 0 2px;
+    box-shadow: 0 96px 0 0 #14151c, 0 152px 0 0 #14151c;
+  }
+  .phone-frame::after{
+    content:"";
+    position:absolute;
+    right:-3px; top: 172px;
+    width:3px; height:86px;
+    background: linear-gradient(180deg,#3a3d48,#111319);
+    border-radius: 0 2px 2px 0;
+  }
+
+  .screen{
+    position:relative;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    border-radius: 42px;
+    background:
+      radial-gradient(120% 55% at 50% -6%, rgba(111,227,201,0.16), transparent 55%),
+      radial-gradient(90% 60% at 90% 8%, rgba(167,139,250,0.14), transparent 55%),
+      radial-gradient(120% 70% at 12% 100%, rgba(93,120,220,0.10), transparent 60%),
+      linear-gradient(180deg, var(--bg-1) 0%, #05060c 70%, #030309 100%);
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05);
+    display:flex;
+    flex-direction:column;
+  }
+
+  .screen::after{
+    /* subtle glass sheen */
+    content:"";
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    background: linear-gradient(120deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 18%);
+  }
+
+  .notch{
+    position:absolute;
+    top: 14px; left:50%;
+    transform: translateX(-50%);
+    width: 96px; height: 26px;
+    background: #000;
+    border-radius: 20px;
+    z-index: 5;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
+  }
+
+  /* ---------- status bar ---------- */
+
+  .status-bar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding: 18px 26px 0;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink-hi);
+    letter-spacing: 0.2px;
+    z-index: 4;
+  }
+  .status-icons{ display:flex; align-items:center; gap:6px; }
+
+  /* ---------- content ---------- */
+
+  .content{
+    position:relative;
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    padding: 22px 26px 20px;
+    z-index: 2;
+  }
+
+  .header-row{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    margin-bottom: 18px;
+  }
+  .eyebrow-date{
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    color: var(--ink-lo);
+    font-weight: 500;
+  }
+  .eyebrow-mark{
+    font-family: var(--font-display);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-xlo);
+  }
+
+  .prompt{
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 1.3;
+    color: var(--ink-hi);
+    margin: 0 0 4px;
+  }
+  .prompt-sub{
+    font-size: 13px;
+    color: var(--ink-lo);
+    margin: 0 0 14px;
+    font-weight: 400;
+  }
+
+  /* ---------- gesture field ---------- */
+
+  .field-wrap{
+    position:relative;
+    width: 100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin: 2px auto 6px;
+  }
+  .field-wrap svg{ width: 232px; height: 232px; display:block; }
+
+  .axis-label{
+    position:absolute;
+    font-size: 9.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-xlo);
+    font-weight: 600;
+    white-space:nowrap;
+  }
+  .axis-top{ top: -2px; left:50%; transform:translateX(-50%); }
+  .axis-bottom{ bottom: -2px; left:50%; transform:translateX(-50%); }
+  .axis-left{ left: -4px; top:50%; transform:translateY(-50%); }
+  .axis-right{ right: -6px; top:50%; transform:translateY(-50%); }
+
+  .noted-chip{
+    position:absolute;
+    left: 50%;
+    bottom: 14px;
+    transform: translateX(-50%);
+    display:flex;
+    align-items:center;
+    gap: 6px;
+    padding: 5px 11px 5px 8px;
+    border-radius: 999px;
+    background: rgba(111,227,201,0.10);
+    border: 1px solid rgba(111,227,201,0.28);
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    color: #bff3e6;
+    backdrop-filter: blur(4px);
+  }
+  .noted-dot{
+    width:5px; height:5px; border-radius:50%;
+    background: var(--teal);
+    box-shadow: 0 0 6px 1px rgba(111,227,201,0.9);
+  }
+
+  .gesture-instruction{
+    text-align:center;
+    font-size: 12px;
+    color: var(--ink-lo);
+    margin: 10px 0 22px;
+  }
+
+  /* ---------- divider ---------- */
+  .soft-divider{
+    height:1px;
+    margin: 0 0 20px;
+    background: linear-gradient(90deg, transparent, var(--panel-line) 22%, var(--panel-line) 78%, transparent);
+  }
+
+  /* ---------- insight card ---------- */
+
+  .insight-card{
+    position:relative;
+    border-radius: 22px;
+    padding: 20px 20px 18px;
+    background: linear-gradient(165deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015));
+    border: 1px solid var(--panel-line);
+  }
+
+  .card-eyebrow{
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #a9e8db;
+    opacity: 0.85;
+    margin: 0 0 14px;
+  }
+
+  .hero-row{
+    display:flex;
+    align-items:center;
+    gap: 16px;
+    margin-bottom: 14px;
+  }
+  .ring-wrap{
+    position:relative;
+    width: 108px;
+    height: 108px;
+    flex: 0 0 auto;
+  }
+  .ring-wrap svg{ width:100%; height:100%; }
+  .ring-number{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: 40px;
+    color: var(--ink-hi);
+    letter-spacing: -0.01em;
+  }
+
+  .hero-meta{ display:flex; flex-direction:column; gap:6px; }
+  .hero-name{
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-hi);
+  }
+  .hero-delta{
+    font-size: 12px;
+    font-weight: 500;
+    color: #9fe6d4;
+  }
+  .hero-delta span{ color: var(--ink-lo); font-weight:400; }
+
+  .insight-sentence{
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--ink-mid);
+    margin: 0 0 18px;
+  }
+
+  .trend-label{
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-xlo);
+    margin: 0 0 6px;
+    font-weight: 600;
+  }
+  .trend-wrap svg{ width:100%; height:auto; display:block; }
+
+  .card-footnote{
+    margin: 16px 0 0;
+    padding-top: 14px;
+    border-top: 1px solid var(--panel-line);
+    font-size: 11.5px;
+    line-height: 1.5;
+    color: var(--ink-xlo);
+    font-style: italic;
+  }
+
+  .home-indicator{
+    margin-top: auto;
+    align-self:center;
+    width: 120px;
+    height: 4px;
+    border-radius: 3px;
+    background: rgba(255,255,255,0.28);
+    margin-bottom: 8px;
+  }
+
+  /* ---------- caption ---------- */
+
+  .caption{
+    text-align:center;
+    max-width: 420px;
+    padding: 0 12px;
+  }
+  .caption-title{
+    font-family: var(--font-display);
+    font-size: 19px;
+    font-weight: 600;
+    color: rgba(245,247,255,0.94);
+    margin: 0 0 8px;
+  }
+  .vibe-tag{
+    display:inline-block;
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #9fe6d4;
+    background: rgba(111,227,201,0.08);
+    border: 1px solid rgba(111,227,201,0.25);
+    padding: 5px 12px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+  }
+  .caption-body{
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: rgba(210,214,235,0.62);
+    margin: 0;
+  }
+</style>
+
+  <div class="stage">
+    <div class="device-shell">
+      <div class="phone-frame">
+        <div class="screen">
+          <div class="notch"></div>
+
+          <div class="status-bar">
+            <span>9:41</span>
+            <span class="status-icons" aria-hidden="true">
+              <svg width="18" height="11" viewBox="0 0 18 11" fill="none"><rect x="0" y="6.5" width="3" height="4.5" rx="0.6" fill="#F5F7FF"/><rect x="4.5" y="4.5" width="3" height="6.5" rx="0.6" fill="#F5F7FF"/><rect x="9" y="2.2" width="3" height="8.8" rx="0.6" fill="#F5F7FF"/><rect x="13.5" y="0" width="3" height="11" rx="0.6" fill="rgba(245,247,255,0.35)"/></svg>
+              <svg width="16" height="11" viewBox="0 0 16 11" fill="none"><path d="M8 10.2C8.6 10.2 9.1 9.98 9.5 9.6L8 8.1L6.5 9.6C6.9 9.98 7.4 10.2 8 10.2Z" fill="#F5F7FF"/><path d="M4.6 6.7C5.5 5.85 6.7 5.35 8 5.35C9.3 5.35 10.5 5.85 11.4 6.7L9.9 8.2C9.4 7.72 8.73 7.43 8 7.43C7.27 7.43 6.6 7.72 6.1 8.2L4.6 6.7Z" fill="#F5F7FF"/><path d="M1.5 3.6C3.2 2.02 5.5 1.05 8 1.05C10.5 1.05 12.8 2.02 14.5 3.6L13 5.1C11.65 3.85 9.9 3.1 8 3.1C6.1 3.1 4.35 3.85 3 5.1L1.5 3.6Z" fill="#F5F7FF"/></svg>
+              <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.75" y="0.75" width="20.5" height="10.5" rx="2.6" stroke="#F5F7FF" stroke-opacity="0.5"/><rect x="2.2" y="2.2" width="14" height="7.6" rx="1.4" fill="#F5F7FF"/><rect x="22" y="4" width="1.6" height="4" rx="0.8" fill="#F5F7FF" fill-opacity="0.5"/></svg>
+            </span>
+          </div>
+
+          <div class="content">
+
+            <div class="header-row">
+              <span class="eyebrow-date">tuesday · 9:14pm</span>
+              <span class="eyebrow-mark">reserve</span>
+            </div>
+
+            <h1 class="prompt">Where's today sitting?</h1>
+            <p class="prompt-sub">One drag. No words needed.</p>
+
+            <div class="field-wrap">
+              <span class="axis-label axis-top">energized</span>
+              <span class="axis-label axis-bottom">running low</span>
+              <span class="axis-label axis-left">steady</span>
+              <span class="axis-label axis-right">keyed up</span>
+
+              <svg viewBox="0 0 300 300" role="img" aria-label="A circular field where the user drags a marker to show today's energy and steadiness. The marker is placed toward energized and slightly keyed up.">
+                <defs>
+                  <radialGradient id="fieldGlow" cx="50%" cy="50%" r="55%">
+                    <stop offset="0%" stop-color="#123a37" stop-opacity="0.55"/>
+                    <stop offset="55%" stop-color="#0c1c2e" stop-opacity="0.35"/>
+                    <stop offset="100%" stop-color="#0a0d18" stop-opacity="0"/>
+                  </radialGradient>
+                  <linearGradient id="orbGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#8ff0d6"/>
+                    <stop offset="100%" stop-color="#a78bfa"/>
+                  </linearGradient>
+                  <filter id="orbBlur" x="-120%" y="-120%" width="340%" height="340%">
+                    <feGaussianBlur stdDeviation="9"/>
+                  </filter>
+                  <filter id="softBlurSmall" x="-120%" y="-120%" width="340%" height="340%">
+                    <feGaussianBlur stdDeviation="3"/>
+                  </filter>
+                </defs>
+
+                <circle cx="150" cy="150" r="140" fill="url(#fieldGlow)"/>
+
+                <circle cx="150" cy="150" r="45" fill="none" stroke="rgba(255,255,255,0.055)" stroke-width="1"/>
+                <circle cx="150" cy="150" r="90" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+                <circle cx="150" cy="150" r="135" fill="none" stroke="rgba(255,255,255,0.045)" stroke-width="1"/>
+
+                <line x1="150" y1="18" x2="150" y2="282" stroke="rgba(255,255,255,0.045)" stroke-width="1"/>
+                <line x1="18" y1="150" x2="282" y2="150" stroke="rgba(255,255,255,0.045)" stroke-width="1"/>
+
+                <!-- motion trace of the drag gesture -->
+                <circle cx="158" cy="143" r="3.4" fill="#bff0e2" opacity="0.16"/>
+                <circle cx="166" cy="136" r="4.2" fill="#bff0e2" opacity="0.26"/>
+                <circle cx="174" cy="129" r="5" fill="#bff0e2" opacity="0.38"/>
+                <circle cx="182" cy="122" r="6" fill="#bff0e2" opacity="0.5"/>
+
+                <!-- placed marker -->
+                <circle cx="190" cy="115" r="22" fill="url(#orbGrad)" opacity="0.35" filter="url(#orbBlur)"/>
+                <circle cx="190" cy="115" r="17" fill="none" stroke="url(#orbGrad)" stroke-width="1" opacity="0.5"/>
+                <circle cx="190" cy="115" r="10.5" fill="url(#orbGrad)" filter="url(#softBlurSmall)"/>
+                <circle cx="190" cy="115" r="9" fill="url(#orbGrad)"/>
+              </svg>
+
+              <div class="noted-chip">
+                <span class="noted-dot"></span>
+                noted · 9:14pm
+              </div>
+            </div>
+
+            <p class="gesture-instruction">Press, drag, let go — that's the whole check-in.</p>
+
+            <div class="soft-divider"></div>
+
+            <div class="insight-card">
+              <p class="card-eyebrow">What we're noticing</p>
+
+              <div class="hero-row">
+                <div class="ring-wrap">
+                  <svg viewBox="0 0 108 108" role="img" aria-label="Reserve is 68 out of 100">
+                    <defs>
+                      <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#7dedc9"/>
+                        <stop offset="100%" stop-color="#a78bfa"/>
+                      </linearGradient>
+                      <filter id="ringGlow" x="-60%" y="-60%" width="220%" height="220%">
+                        <feGaussianBlur stdDeviation="4.5"/>
+                      </filter>
+                    </defs>
+                    <circle cx="54" cy="54" r="45" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="8"/>
+                    <circle cx="54" cy="54" r="45" fill="none" stroke="url(#ringGrad)" stroke-width="9" opacity="0.45" filter="url(#ringGlow)"
+                      stroke-linecap="round" stroke-dasharray="282.7" stroke-dashoffset="90.5" transform="rotate(-90 54 54)"/>
+                    <circle cx="54" cy="54" r="45" fill="none" stroke="url(#ringGrad)" stroke-width="8"
+                      stroke-linecap="round" stroke-dasharray="282.7" stroke-dashoffset="90.5" transform="rotate(-90 54 54)"/>
+                  </svg>
+                  <div class="ring-number">68</div>
+                </div>
+                <div class="hero-meta">
+                  <span class="hero-name">Reserve</span>
+                  <span class="hero-delta">up 6 <span>from last week</span></span>
+                  <span class="hero-delta" style="color: var(--ink-lo);">your capacity to ride out discomfort today</span>
+                </div>
+              </div>
+
+              <p class="insight-sentence">Late-night check-ins and keyed-up placements tend to show up together for you — worth a gentler evening plan, not a red flag.</p>
+
+              <p class="trend-label">Last 14 days</p>
+              <div class="trend-wrap">
+                <svg viewBox="0 0 280 64" role="img" aria-label="Reserve trend over the last 14 days, gradually rising to 68 today">
+                  <defs>
+                    <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stop-color="#6fe3c9"/>
+                      <stop offset="100%" stop-color="#a78bfa"/>
+                    </linearGradient>
+                    <linearGradient id="areaGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" stop-color="#8fe9d4" stop-opacity="0.16"/>
+                      <stop offset="100%" stop-color="#8fe9d4" stop-opacity="0"/>
+                    </linearGradient>
+                    <filter id="lineGlow" x="-20%" y="-80%" width="140%" height="260%">
+                      <feGaussianBlur stdDeviation="2.6"/>
+                    </filter>
+                  </defs>
+                  <path d="M8,38.8 L28.3,32.9 L48.6,41.7 L68.9,30 L89.3,25.6 L109.6,31.5 L129.9,22.7 L150.2,28.5 L170.5,15.3 L190.8,21.2 L211.2,12.4 L231.5,24.1 L251.8,18.3 L272.1,18.3 L272.1,56 L8,56 Z"
+                    fill="url(#areaGrad)" stroke="none"/>
+                  <path d="M8,38.8 L28.3,32.9 L48.6,41.7 L68.9,30 L89.3,25.6 L109.6,31.5 L129.9,22.7 L150.2,28.5 L170.5,15.3 L190.8,21.2 L211.2,12.4 L231.5,24.1 L251.8,18.3 L272.1,18.3"
+                    fill="none" stroke="url(#lineGrad)" stroke-width="3" opacity="0.5" filter="url(#lineGlow)" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M8,38.8 L28.3,32.9 L48.6,41.7 L68.9,30 L89.3,25.6 L109.6,31.5 L129.9,22.7 L150.2,28.5 L170.5,15.3 L190.8,21.2 L211.2,12.4 L231.5,24.1 L251.8,18.3 L272.1,18.3"
+                    fill="none" stroke="url(#lineGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="272.1" cy="18.3" r="4" fill="#eafff7"/>
+                  <circle cx="272.1" cy="18.3" r="8" fill="none" stroke="#8fe9d4" stroke-opacity="0.4"/>
+                </svg>
+              </div>
+
+              <p class="card-footnote">Reserve is a pattern we're still learning about you — not a score to chase, and not compared to anyone else's.</p>
+            </div>
+
+          </div>
+
+          <div class="home-indicator"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="caption">
+      <div class="vibe-tag">quiet resilience</div>
+      <h2 class="caption-title">Reserve — a two-second drag, not a form</h2>
+      <p class="caption-body">Placing one marker in a field replaces a multi-question check-in, and translating it into "reserve" — a capacity you have, not a risk you're accruing — keeps the daily touch light enough to actually keep doing, and frames the app as noticing you rather than grading you.</p>
+    </div>
+  </div>
+
+<style>:host{width:432px!important;height:886px!important;min-height:0!important;padding:0!important;margin:0!important;display:block!important;overflow:hidden!important}.side-btn{display:none!important}</style>

@@ -1,0 +1,524 @@
+<style>
+  :host{
+    --bg-0:#07060c;
+    --bg-1:#0d0b18;
+    --violet:#9b8cfb;
+    --violet-soft:#7c6cf0;
+    --teal:#6fe3d1;
+    --ink-0:#f4f2fb;
+    --ink-1:#c9c4dc;
+    --ink-2:#9089ab;
+    --ink-3:#655f7d;
+    --card:#14111f;
+    --card-line:#252037;
+    --pill:#1a1729;
+  }
+
+  *{ box-sizing:border-box; }
+
+  :host,:host{
+    margin:0;
+    padding:0;
+    min-height:100%;
+    background:var(--bg-0);
+  }
+
+  :host{
+    font-family:'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color:var(--ink-0);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    min-height:100vh;
+    padding:48px 20px 64px;
+    background:
+      radial-gradient(ellipse 900px 600px at 50% -10%, #1c1530 0%, transparent 60%),
+      radial-gradient(ellipse 700px 500px at 90% 100%, #0e1f22 0%, transparent 55%),
+      var(--bg-0);
+  }
+
+  .gallery-heading{
+    text-align:center;
+    margin-bottom:36px;
+  }
+  .gallery-heading .k{
+    font-family:'Sora', -apple-system, 'Segoe UI', sans-serif;
+    font-weight:300;
+    font-size:13px;
+    letter-spacing:0.28em;
+    text-transform:uppercase;
+    color:var(--ink-3);
+  }
+
+  /* ---------- device frame ---------- */
+  .device{
+    position:relative;
+    width:390px;
+    height:844px;
+    border-radius:56px;
+    padding:14px;
+    background:linear-gradient(160deg,#232030,#0a0912 60%);
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.04) inset,
+      0 40px 90px -20px rgba(0,0,0,0.75),
+      0 0 120px -30px rgba(124,108,240,0.25);
+  }
+
+  .screen{
+    position:relative;
+    width:100%;
+    height:100%;
+    border-radius:42px;
+    overflow:hidden;
+    background:var(--bg-1);
+    display:flex;
+    flex-direction:column;
+  }
+
+  .notch{
+    position:absolute;
+    top:10px;
+    left:50%;
+    transform:translateX(-50%);
+    width:120px;
+    height:28px;
+    background:#000;
+    border-radius:20px;
+    z-index:30;
+  }
+
+  /* ---------- status bar ---------- */
+  .statusbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:18px 28px 4px;
+    font-size:14px;
+    font-weight:600;
+    letter-spacing:0.01em;
+    color:var(--ink-0);
+    position:relative;
+    z-index:20;
+  }
+  .statusbar .icons{ display:flex; gap:6px; align-items:center; opacity:0.9; }
+
+  /* ---------- glow blobs (decorative) ---------- */
+  .glow{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(60px);
+    pointer-events:none;
+    z-index:0;
+  }
+  .glow-1{
+    width:280px; height:220px;
+    top:70px; left:-60px;
+    background:radial-gradient(circle, rgba(155,140,251,0.35), transparent 70%);
+  }
+  .glow-2{
+    width:260px; height:220px;
+    top:130px; right:-90px;
+    background:radial-gradient(circle, rgba(111,227,209,0.22), transparent 70%);
+  }
+
+  /* ---------- content ---------- */
+  .content{
+    position:relative;
+    z-index:10;
+    flex:1;
+    overflow-y:auto;
+    padding:6px 24px 20px;
+    display:flex;
+    flex-direction:column;
+  }
+
+  .top-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-top:10px;
+  }
+  .date-label{
+    font-size:13px;
+    color:var(--ink-2);
+    letter-spacing:0.02em;
+  }
+
+  .noted-pill{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    background:var(--pill);
+    border:1px solid var(--card-line);
+    color:var(--ink-1);
+    font-size:12px;
+    padding:6px 12px 6px 10px;
+    border-radius:100px;
+  }
+  .noted-pill .dot{
+    width:6px; height:6px; border-radius:50%;
+    background:linear-gradient(135deg,var(--violet),var(--teal));
+  }
+
+  .eyebrow{
+    margin-top:34px;
+    font-size:11.5px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--ink-3);
+    font-weight:600;
+  }
+
+  .hero-number-row{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    margin-top:14px;
+  }
+  .hero-number{
+    font-family:'Sora', -apple-system, 'Segoe UI', sans-serif;
+    font-weight:200;
+    font-size:88px;
+    line-height:1;
+    letter-spacing:-0.02em;
+    background:linear-gradient(120deg, #ffffff 0%, var(--violet) 55%, var(--teal) 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .hero-unit{
+    font-family:'Sora', -apple-system, 'Segoe UI', sans-serif;
+    font-weight:400;
+    font-size:22px;
+    color:var(--ink-1);
+    padding-bottom:12px;
+  }
+
+  .metric-name{
+    font-family:'Sora', -apple-system, 'Segoe UI', sans-serif;
+    font-weight:600;
+    font-size:19px;
+    color:var(--ink-0);
+    margin-top:6px;
+  }
+  .metric-sub{
+    font-size:13.5px;
+    color:var(--ink-2);
+    margin-top:6px;
+    line-height:1.5;
+    max-width:280px;
+  }
+
+  /* ---------- curve chart ---------- */
+  .chart-wrap{
+    margin-top:22px;
+    position:relative;
+  }
+  .chart-labels{
+    display:flex;
+    justify-content:space-between;
+    font-size:10.5px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--ink-3);
+    padding:0 2px;
+    margin-top:2px;
+  }
+  .marker-tag{
+    position:absolute;
+    font-size:11px;
+    color:var(--ink-1);
+    background:rgba(20,17,31,0.85);
+    border:1px solid var(--card-line);
+    padding:3px 8px;
+    border-radius:8px;
+    white-space:nowrap;
+    backdrop-filter:blur(4px);
+  }
+
+  @keyframes pulse{
+    0%   { r:4;   opacity:0.9; }
+    50%  { r:7.5; opacity:0.25; }
+    100% { r:4;   opacity:0.9; }
+  }
+  .pulse-ring{
+    transform-origin:center;
+    animation:pulse 2.6s ease-in-out infinite;
+  }
+
+  /* ---------- insight card ---------- */
+  .insight-card{
+    margin-top:28px;
+    background:var(--card);
+    border:1px solid var(--card-line);
+    border-radius:18px;
+    padding:16px 18px;
+    display:flex;
+    gap:12px;
+  }
+  .insight-icon{
+    flex:none;
+    width:30px; height:30px;
+    border-radius:9px;
+    background:linear-gradient(135deg, rgba(155,140,251,0.25), rgba(111,227,209,0.18));
+    display:flex; align-items:center; justify-content:center;
+  }
+  .insight-text{
+    font-size:13.5px;
+    line-height:1.55;
+    color:var(--ink-1);
+  }
+  .insight-text .foot{
+    display:block;
+    margin-top:6px;
+    font-size:11.5px;
+    color:var(--ink-3);
+  }
+
+  /* ---------- reassurance ---------- */
+  .reassure{
+    margin-top:26px;
+    text-align:center;
+    font-family:'Sora', -apple-system, 'Segoe UI', sans-serif;
+    font-weight:400;
+    font-size:15.5px;
+    color:var(--ink-1);
+    line-height:1.6;
+    padding:0 8px;
+  }
+
+  .spacer{ flex:1; }
+
+  /* ---------- actions ---------- */
+  .actions{
+    margin-top:22px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:12px;
+  }
+  .btn-primary{
+    width:100%;
+    text-align:center;
+    padding:15px 18px;
+    border-radius:100px;
+    background:linear-gradient(120deg, var(--violet-soft), var(--teal));
+    color:#0a0912;
+    font-weight:600;
+    font-size:14.5px;
+    letter-spacing:0.01em;
+    box-shadow:0 12px 30px -10px rgba(124,108,240,0.55);
+  }
+  .btn-ghost{
+    background:none;
+    border:none;
+    color:var(--ink-2);
+    font-size:13.5px;
+    padding:4px;
+    text-decoration:underline;
+    text-decoration-color:var(--card-line);
+    text-underline-offset:4px;
+  }
+  .actions-foot{
+    margin-top:2px;
+    font-size:11.5px;
+    color:var(--ink-3);
+    text-align:center;
+  }
+
+  /* ---------- tab bar ---------- */
+  .tabbar{
+    position:relative;
+    z-index:10;
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    padding:12px 10px 8px;
+    border-top:1px solid var(--card-line);
+    background:rgba(13,11,24,0.9);
+  }
+  .tab{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:4px;
+    color:var(--ink-3);
+    font-size:10px;
+  }
+  .tab.active{ color:var(--ink-0); }
+  .tab .tab-dot{
+    width:5px; height:5px; border-radius:50%;
+    background:transparent;
+  }
+  .tab.active .tab-dot{
+    background:linear-gradient(135deg,var(--violet),var(--teal));
+  }
+  .home-indicator{
+    width:134px;
+    height:5px;
+    border-radius:100px;
+    background:rgba(244,242,251,0.35);
+    margin:8px auto 4px;
+  }
+
+  /* ---------- caption ---------- */
+  .caption{
+    margin-top:34px;
+    text-align:center;
+    max-width:380px;
+  }
+  .caption .name{
+    font-family:'Sora', -apple-system, 'Segoe UI', sans-serif;
+    font-weight:600;
+    font-size:20px;
+    color:var(--ink-0);
+  }
+  .caption .tag{
+    display:inline-block;
+    margin-top:8px;
+    font-size:11px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--teal);
+    background:rgba(111,227,209,0.1);
+    border:1px solid rgba(111,227,209,0.25);
+    padding:5px 12px;
+    border-radius:100px;
+  }
+  .caption .why{
+    margin-top:14px;
+    font-size:13.5px;
+    line-height:1.6;
+    color:var(--ink-2);
+  }
+</style>
+
+  <div class="gallery-heading">
+    <div class="k">Concept mockup · problematic pornography use prevention</div>
+  </div>
+
+  <div class="device">
+    <div class="notch"></div>
+    <div class="screen">
+
+      <div class="glow glow-1"></div>
+      <div class="glow glow-2"></div>
+
+      <div class="statusbar">
+        <span>7:12</span>
+        <span class="icons">
+          <!-- simple system-style status glyphs, no external assets -->
+          <svg width="16" height="11" viewBox="0 0 16 11" fill="none"><rect x="0" y="6" width="3" height="5" rx="0.6" fill="#f4f2fb"/><rect x="4.5" y="4" width="3" height="7" rx="0.6" fill="#f4f2fb"/><rect x="9" y="1.5" width="3" height="9.5" rx="0.6" fill="#f4f2fb"/><rect x="13.5" y="0" width="2.5" height="11" rx="0.6" fill="#f4f2fb" opacity="0.35"/></svg>
+          <svg width="22" height="11" viewBox="0 0 22 11" fill="none"><rect x="0.5" y="0.5" width="19" height="10" rx="2.5" stroke="#f4f2fb" opacity="0.6"/><rect x="2" y="2" width="14" height="7" rx="1.2" fill="#f4f2fb"/><rect x="20.5" y="3.5" width="1.5" height="4" rx="0.7" fill="#f4f2fb" opacity="0.6"/></svg>
+        </span>
+      </div>
+
+      <div class="content">
+
+        <div class="top-row">
+          <span class="date-label">Tuesday, July 14</span>
+          <span class="noted-pill"><span class="dot"></span>Noted last night</span>
+        </div>
+
+        <div class="eyebrow">What usually happens next</div>
+
+        <div class="hero-number-row">
+          <span class="hero-number">3.2</span>
+          <span class="hero-unit">hrs</span>
+        </div>
+        <div class="metric-name">Return to steady</div>
+        <div class="metric-sub">How long it's taken you to feel like yourself again, on mornings like this one. You're partway there already.</div>
+
+        <div class="chart-wrap">
+          <svg width="100%" viewBox="0 0 342 168" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A line showing intensity easing from last night toward midday, with a marker at now and a marker at the point it typically levels off.">
+            <defs>
+              <linearGradient id="strokeGrad" x1="0" y1="0" x2="342" y2="0" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#b7abff"/>
+                <stop offset="55%" stop-color="#9b8cfb"/>
+                <stop offset="100%" stop-color="#6fe3d1"/>
+              </linearGradient>
+              <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#9b8cfb" stop-opacity="0.28"/>
+                <stop offset="100%" stop-color="#9b8cfb" stop-opacity="0"/>
+              </linearGradient>
+              <filter id="softGlow" x="-30%" y="-100%" width="160%" height="300%">
+                <feGaussianBlur stdDeviation="7" result="blur"/>
+                <feMerge>
+                  <feMergeNode in="blur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs>
+
+            <!-- soft dotted baseline -->
+            <line x1="0" y1="140" x2="342" y2="140" stroke="#2a2540" stroke-width="1" stroke-dasharray="2 5"/>
+
+            <!-- filled area under curve -->
+            <path d="M0,34 C 60,50 90,78 120,96 C 165,122 210,132 342,140 L342,168 L0,168 Z" fill="url(#areaGrad)"/>
+
+            <!-- glow pass -->
+            <path d="M0,34 C 60,50 90,78 120,96 C 165,122 210,132 342,140" stroke="url(#strokeGrad)" stroke-width="5" stroke-linecap="round" opacity="0.35" filter="url(#softGlow)"/>
+
+            <!-- crisp curve -->
+            <path d="M0,34 C 60,50 90,78 120,96 C 165,122 210,132 342,140" stroke="url(#strokeGrad)" stroke-width="2.5" stroke-linecap="round"/>
+
+            <!-- "now" marker -->
+            <circle cx="120" cy="96" r="4" fill="#f4f2fb"/>
+            <circle class="pulse-ring" cx="120" cy="96" r="4" fill="none" stroke="#b7abff" stroke-width="1.5"/>
+
+            <!-- "levels off" marker -->
+            <circle cx="270" cy="134" r="3.5" fill="#6fe3d1"/>
+          </svg>
+
+          <div class="marker-tag" style="top:6px; left:8px;">last night</div>
+          <div class="marker-tag" style="top:64px; left:130px;">now, 7:12am</div>
+          <div class="marker-tag" style="top:100px; left:222px;">usually levels here</div>
+
+          <div class="chart-labels">
+            <span>Midnight</span>
+            <span>Morning</span>
+            <span>Midday</span>
+          </div>
+        </div>
+
+        <div class="insight-card">
+          <div class="insight-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M21 12.5A9 9 0 1 1 11.5 3a7 7 0 0 0 9.5 9.5Z" stroke="#c9c4dc" stroke-width="1.6" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="insight-text">
+            Late nights and short sleep tend to show up together with mornings like this one for you.
+            <span class="foot">A pattern worth knowing, not a cause — and not a rule.</span>
+          </div>
+        </div>
+
+        <div class="reassure">One night doesn't undo where you've been.</div>
+
+        <div class="spacer"></div>
+
+        <div class="actions">
+          <div class="btn-primary">See what's helped before</div>
+          <button class="btn-ghost">Not right now — I'll start my day</button>
+          <div class="actions-foot">Either way, this is still here when you want it.</div>
+        </div>
+
+      </div>
+
+      <div class="tabbar">
+        <div class="tab active"><span class="tab-dot"></span>Home</div>
+        <div class="tab">Patterns</div>
+        <div class="tab">Plan</div>
+        <div class="tab">You</div>
+      </div>
+      <div class="home-indicator"></div>
+
+    </div>
+  </div>
+
+  <div class="caption">
+    <div class="name">Return to steady</div>
+    <div class="tag">Soft landing</div>
+    <div class="why">It hands the user a number the app quietly discovered about their own recovery — not a streak to protect or a confession to make — so the worst moment of the morning becomes proof they already know how to come back.</div>
+  </div>
+
+<style>:host{width:432px!important;height:886px!important;min-height:0!important;padding:0!important;margin:0!important;display:block!important;overflow:hidden!important}.side-btn{display:none!important}</style>

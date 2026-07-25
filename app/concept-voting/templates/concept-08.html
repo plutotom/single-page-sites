@@ -1,0 +1,564 @@
+<style>
+  :host{
+    --bg-0:#050509;
+    --bg-1:#0b0a14;
+    --panel:#12111c;
+    --panel-2:#181725;
+    --ink-0:#f4f2fb;
+    --ink-1:#c7c3d9;
+    --ink-2:#8d89a3;
+    --ink-3:#5f5c73;
+    --hairline:rgba(255,255,255,0.08);
+    --accent-a:#8f7bff;
+    --accent-b:#59e8c9;
+    --accent-glow:rgba(143,123,255,0.55);
+  }
+
+  *{box-sizing:border-box;}
+  :host,:host{margin:0;padding:0;}
+
+  :host{
+    min-height:100vh;
+    background:
+      radial-gradient(ellipse 900px 600px at 20% 0%, #14102a 0%, transparent 60%),
+      radial-gradient(ellipse 900px 700px at 85% 100%, #0c1c22 0%, transparent 55%),
+      var(--bg-0);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:56px 20px;
+    font-family:'Inter', -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  .stage{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:28px;
+  }
+
+  /* ---------- Phone frame ---------- */
+  .device{
+    width:430px;
+    height:876px;
+    border-radius:58px;
+    padding:14px;
+    background:
+      linear-gradient(160deg, #2a2a35 0%, #131319 40%, #0a0a0d 100%);
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.04),
+      0 40px 90px -20px rgba(0,0,0,0.75),
+      0 0 120px -30px var(--accent-glow);
+    position:relative;
+  }
+  .device::before{ /* side button */
+    content:"";
+    position:absolute;
+    right:-3px; top:180px;
+    width:3px; height:70px;
+    background:#050508;
+    border-radius:2px 0 0 2px;
+  }
+  .device::after{
+    content:"";
+    position:absolute;
+    left:-3px; top:140px;
+    width:3px; height:40px;
+    background:#050508;
+    border-radius:0 2px 2px 0;
+    box-shadow: 0 60px 0 0 #050508, 0 110px 0 0 #050508;
+  }
+
+  .screen{
+    width:100%;
+    height:100%;
+    border-radius:46px;
+    overflow:hidden;
+    position:relative;
+    background:
+      radial-gradient(ellipse 520px 420px at 50% -6%, #241c46 0%, transparent 55%),
+      radial-gradient(ellipse 460px 360px at 90% 30%, #0f2c30 0%, transparent 60%),
+      linear-gradient(180deg, #0a0912 0%, #07060d 55%, #050509 100%);
+    display:flex;
+    flex-direction:column;
+    color:var(--ink-0);
+  }
+
+  .dynamic-island{
+    position:absolute;
+    top:14px; left:50%;
+    transform:translateX(-50%);
+    width:100px; height:28px;
+    background:#000;
+    border-radius:20px;
+    z-index:20;
+  }
+
+  /* ---------- Status bar ---------- */
+  .statusbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:16px 26px 4px;
+    font-size:14px;
+    font-weight:600;
+    letter-spacing:0.2px;
+    color:var(--ink-0);
+    flex:0 0 auto;
+  }
+  .statusbar .icons{ display:flex; align-items:center; gap:5px; }
+
+  /* ---------- Content ---------- */
+  .content{
+    flex:1 1 auto;
+    padding:6px 24px 0;
+    display:flex;
+    flex-direction:column;
+    min-height:0;
+  }
+
+  .top-label{
+    font-size:11px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--ink-3);
+    margin:6px 0 3px;
+    font-weight:600;
+  }
+  .greeting{
+    font-family:'Sora', -apple-system, 'Segoe UI', sans-serif;
+    font-weight:400;
+    font-size:19px;
+    line-height:1.3;
+    color:var(--ink-0);
+    margin:0 0 2px;
+    max-width:280px;
+  }
+  .greeting b{ font-weight:600; color:var(--ink-0); }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    margin:0 auto 0;
+    width:200px;
+    height:200px;
+    flex:0 0 auto;
+  }
+  .hero svg{ width:100%; height:100%; overflow:visible; }
+
+  .hero-center{
+    position:absolute;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    pointer-events:none;
+  }
+  .hero-number{
+    font-family:'Sora', -apple-system, 'Segoe UI', sans-serif;
+    font-weight:200;
+    font-size:76px;
+    line-height:1;
+    letter-spacing:-0.02em;
+    color:var(--ink-0);
+    display:flex;
+    align-items:flex-end;
+    gap:6px;
+  }
+  .hero-number span{
+    font-size:22px;
+    font-weight:500;
+    color:var(--ink-2);
+    padding-bottom:12px;
+  }
+  .hero-caption{
+    font-size:12px;
+    color:var(--ink-2);
+    text-align:center;
+    margin-top:2px;
+    max-width:150px;
+    line-height:1.35;
+  }
+  .hero-caption strong{ color:var(--ink-1); font-weight:600; }
+
+  .metric-name{
+    text-align:center;
+    font-size:13px;
+    font-weight:600;
+    color:var(--ink-1);
+    margin:8px 0 0;
+    letter-spacing:0.01em;
+  }
+
+  .reassurance{
+    text-align:center;
+    font-size:12px;
+    color:var(--ink-3);
+    margin:6px auto 0;
+    max-width:250px;
+    line-height:1.45;
+  }
+
+  /* ---------- CTA ---------- */
+  .cta{
+    margin:12px auto 0;
+    width:100%;
+    max-width:320px;
+    padding:12px 20px;
+    border-radius:100px;
+    border:none;
+    font-family:'Inter', sans-serif;
+    font-size:14.5px;
+    font-weight:600;
+    color:#0a0912;
+    background:linear-gradient(90deg, var(--accent-b) 0%, var(--accent-a) 100%);
+    box-shadow:0 8px 24px -6px rgba(143,123,255,0.5);
+    letter-spacing:0.01em;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    cursor:pointer;
+  }
+
+  /* ---------- Roadmap ---------- */
+  .section-title{
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--ink-3);
+    font-weight:600;
+    margin:14px 0 8px;
+  }
+  .roadmap{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:6px;
+    position:relative;
+  }
+  .roadmap::before{
+    content:"";
+    position:absolute;
+    top:9px; left:9px; right:9px;
+    height:1px;
+    background:linear-gradient(90deg, var(--accent-a) 0%, var(--hairline) 18%, var(--hairline) 100%);
+  }
+  .milestone{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:7px;
+    flex:1;
+    position:relative;
+  }
+  .milestone .dot{
+    width:18px; height:18px;
+    border-radius:50%;
+    background:var(--panel-2);
+    border:1.5px solid var(--hairline);
+    display:flex; align-items:center; justify-content:center;
+    font-size:9px; color:var(--ink-3); font-weight:700;
+  }
+  .milestone.now .dot{
+    background:radial-gradient(circle at 35% 30%, #d7ceff, var(--accent-a));
+    border-color:transparent;
+    color:#1a1330;
+    box-shadow:0 0 12px 1px var(--accent-glow);
+  }
+  .milestone .m-day{
+    font-size:10.5px;
+    color:var(--ink-3);
+    font-weight:600;
+  }
+  .milestone.now .m-day{ color:var(--ink-1); }
+  .milestone .m-label{
+    font-size:10.5px;
+    color:var(--ink-3);
+    text-align:center;
+    line-height:1.3;
+    max-width:64px;
+  }
+  .milestone.now .m-label{ color:var(--ink-2); }
+
+  /* ---------- Ghost preview card ---------- */
+  .ghost-card{
+    margin-top:12px;
+    padding:12px 14px 12px;
+    border-radius:18px;
+    background:var(--panel);
+    border:1px solid var(--hairline);
+    position:relative;
+    overflow:hidden;
+  }
+  .ghost-card .gc-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .ghost-card .gc-title{
+    font-size:12.5px;
+    font-weight:600;
+    color:var(--ink-1);
+  }
+  .gc-lock{
+    display:flex;
+    align-items:center;
+    gap:5px;
+    font-size:10px;
+    font-weight:600;
+    color:var(--ink-3);
+    background:rgba(255,255,255,0.04);
+    padding:4px 9px 4px 7px;
+    border-radius:100px;
+  }
+  .gc-bars{
+    display:flex;
+    align-items:flex-end;
+    gap:7px;
+    height:34px;
+    margin-top:10px;
+    filter:blur(2.5px);
+    opacity:0.55;
+  }
+  .gc-bars .bar{
+    flex:1;
+    border-radius:4px 4px 0 0;
+    background:linear-gradient(180deg, var(--accent-a), transparent);
+  }
+  .gc-note{
+    margin-top:6px;
+    font-size:10.5px;
+    color:var(--ink-3);
+    line-height:1.35;
+  }
+
+  /* ---------- Bottom nav ---------- */
+  .bottom-nav{
+    flex:0 0 auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-around;
+    padding:8px 18px calc(10px + 14px);
+    border-top:1px solid var(--hairline);
+    background:rgba(8,7,14,0.7);
+    backdrop-filter:blur(6px);
+  }
+  .nav-item{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:4px;
+    color:var(--ink-3);
+    font-size:10px;
+    font-weight:600;
+  }
+  .nav-item.active{ color:var(--ink-0); }
+  .nav-item svg{ width:20px; height:20px; }
+  .nav-item .nav-badge{
+    position:relative;
+  }
+  .nav-item .lock-dot{
+    position:absolute;
+    top:-2px; right:-3px;
+    width:8px; height:8px;
+    border-radius:50%;
+    background:var(--bg-1);
+    display:flex; align-items:center; justify-content:center;
+  }
+
+  /* ---------- Caption ---------- */
+  .caption{
+    text-align:center;
+    max-width:400px;
+    color:var(--ink-1);
+  }
+  .caption .name{
+    font-family:'Sora', -apple-system, 'Segoe UI', sans-serif;
+    font-size:18px;
+    font-weight:600;
+    color:#f4f2fb;
+    margin:0 0 6px;
+  }
+  .caption .vibe{
+    display:inline-block;
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:#0a0912;
+    background:linear-gradient(90deg, var(--accent-b), var(--accent-a));
+    padding:4px 12px;
+    border-radius:100px;
+    margin-bottom:12px;
+  }
+  .caption .why{
+    font-size:13px;
+    line-height:1.6;
+    color:var(--ink-2);
+    margin:0;
+  }
+</style>
+
+  <div class="stage">
+    <div class="device">
+      <div class="screen">
+        <div class="dynamic-island"></div>
+
+        <div class="statusbar">
+          <span>9:41</span>
+          <span class="icons">
+            <svg width="17" height="11" viewBox="0 0 17 11" fill="none"><rect x="0" y="6" width="3" height="5" rx="0.5" fill="#f4f2fb"/><rect x="4.5" y="4" width="3" height="7" rx="0.5" fill="#f4f2fb"/><rect x="9" y="2" width="3" height="9" rx="0.5" fill="#f4f2fb"/><rect x="13.5" y="0" width="3" height="11" rx="0.5" fill="#f4f2fb" opacity="0.9"/></svg>
+            <svg width="15" height="11" viewBox="0 0 15 11" fill="none"><path d="M7.5 9.5C8.05 9.5 8.5 9.05 8.5 8.5C8.5 7.95 8.05 7.5 7.5 7.5C6.95 7.5 6.5 7.95 6.5 8.5C6.5 9.05 6.95 9.5 7.5 9.5Z" fill="#f4f2fb"/><path d="M4.8 6.3C5.5 5.6 6.45 5.2 7.5 5.2C8.55 5.2 9.5 5.6 10.2 6.3" stroke="#f4f2fb" stroke-width="1.1" stroke-linecap="round"/><path d="M2.2 3.7C3.6 2.3 5.45 1.5 7.5 1.5C9.55 1.5 11.4 2.3 12.8 3.7" stroke="#f4f2fb" stroke-width="1.1" stroke-linecap="round"/></svg>
+            <svg width="25" height="11" viewBox="0 0 25 11" fill="none"><rect x="0.75" y="0.75" width="20.5" height="9.5" rx="2.5" stroke="#f4f2fb" stroke-opacity="0.6"/><rect x="2" y="2" width="14" height="7" rx="1.5" fill="#f4f2fb"/><rect x="22.5" y="3.5" width="1.6" height="4" rx="0.8" fill="#f4f2fb" opacity="0.6"/></svg>
+          </span>
+        </div>
+
+        <div class="content">
+
+          <div class="top-label">today · day 1</div>
+          <p class="greeting">hi. glad you're here — let's start <b>noticing</b>, gently.</p>
+
+          <!-- HERO: 7-day baseline ring -->
+          <div class="hero">
+            <svg viewBox="0 0 260 260">
+              <defs>
+                <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#8f7bff" stop-opacity="0.5"/>
+                  <stop offset="100%" stop-color="#8f7bff" stop-opacity="0"/>
+                </radialGradient>
+                <linearGradient id="arcGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#59e8c9"/>
+                  <stop offset="100%" stop-color="#8f7bff"/>
+                </linearGradient>
+                <filter id="softBlur" x="-100%" y="-100%" width="300%" height="300%">
+                  <feGaussianBlur stdDeviation="14"/>
+                </filter>
+                <filter id="nodeGlow" x="-200%" y="-200%" width="500%" height="500%">
+                  <feGaussianBlur stdDeviation="5" result="b"/>
+                  <feMerge>
+                    <feMergeNode in="b"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+              </defs>
+
+              <!-- ambient glow behind everything -->
+              <circle cx="130" cy="130" r="120" fill="url(#glow)" filter="url(#softBlur)"/>
+
+              <!-- base ring (7 days, dim) -->
+              <circle cx="130" cy="130" r="100" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="2"/>
+
+              <!-- progress arc: 1 of 7 days -->
+              <path d="M 130 30 A 100 100 0 0 1 208.2 67.7" fill="none" stroke="url(#arcGrad)" stroke-width="3.5" stroke-linecap="round"/>
+
+              <!-- 7 day nodes -->
+              <g font-family="Inter, sans-serif">
+                <!-- day 1 (today, active) -->
+                <circle cx="130" cy="30" r="7" fill="#f4f2fb" filter="url(#nodeGlow)"/>
+                <!-- day 2..7 (hollow, future) -->
+                <circle cx="208.2" cy="67.7" r="4.5" fill="#0a0912" stroke="rgba(255,255,255,0.28)" stroke-width="1.6"/>
+                <circle cx="227.5" cy="152.3" r="4.5" fill="#0a0912" stroke="rgba(255,255,255,0.28)" stroke-width="1.6"/>
+                <circle cx="173.4" cy="220.1" r="4.5" fill="#0a0912" stroke="rgba(255,255,255,0.28)" stroke-width="1.6"/>
+                <circle cx="86.6" cy="220.1" r="4.5" fill="#0a0912" stroke="rgba(255,255,255,0.28)" stroke-width="1.6"/>
+                <circle cx="32.5" cy="152.3" r="4.5" fill="#0a0912" stroke="rgba(255,255,255,0.28)" stroke-width="1.6"/>
+                <circle cx="51.8" cy="67.7" r="4.5" fill="#0a0912" stroke="rgba(255,255,255,0.28)" stroke-width="1.6"/>
+              </g>
+            </svg>
+
+            <div class="hero-center">
+              <div class="hero-number">1<span>/ 7</span></div>
+              <div class="hero-caption">check-ins so far — <strong>day 7</strong> is when your first pattern shows up</div>
+            </div>
+          </div>
+
+          <p class="metric-name">your baseline</p>
+          <p class="reassurance">no streaks to keep, no progress to lose. missing a day doesn't reset anything — it's just a day.</p>
+
+          <button class="cta">
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M7.5 1.5V13.5M1.5 7.5H13.5" stroke="#0a0912" stroke-width="1.6" stroke-linecap="round"/></svg>
+            log today's check-in
+          </button>
+
+          <div class="section-title">on the way</div>
+          <div class="roadmap">
+            <div class="milestone now">
+              <div class="dot">1</div>
+              <div class="m-day">day 1</div>
+              <div class="m-label">today</div>
+            </div>
+            <div class="milestone">
+              <div class="dot">3</div>
+              <div class="m-day">day 3</div>
+              <div class="m-label">a mood signal appears</div>
+            </div>
+            <div class="milestone">
+              <div class="dot">5</div>
+              <div class="m-day">day 5</div>
+              <div class="m-label">a pattern starts to show</div>
+            </div>
+            <div class="milestone">
+              <div class="dot">7</div>
+              <div class="m-day">day 7</div>
+              <div class="m-label">your first insight</div>
+            </div>
+          </div>
+
+          <div class="ghost-card">
+            <div class="gc-head">
+              <span class="gc-title">insights</span>
+              <span class="gc-lock">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><rect x="2" y="4.3" width="6" height="4.5" rx="1" stroke="#8d89a3" stroke-width="1"/><path d="M3.2 4.3V3.2C3.2 2.2 3.9 1.5 5 1.5C6.1 1.5 6.8 2.2 6.8 3.2V4.3" stroke="#8d89a3" stroke-width="1"/></svg>
+                unlocks day 7
+              </span>
+            </div>
+            <div class="gc-bars">
+              <div class="bar" style="height:35%"></div>
+              <div class="bar" style="height:55%"></div>
+              <div class="bar" style="height:40%"></div>
+              <div class="bar" style="height:70%"></div>
+              <div class="bar" style="height:50%"></div>
+              <div class="bar" style="height:60%"></div>
+              <div class="bar" style="height:30%"></div>
+            </div>
+            <p class="gc-note">this is what it'll look like — once there's enough of your own check-ins to draw from.</p>
+          </div>
+
+        </div>
+
+        <div class="bottom-nav">
+          <div class="nav-item active">
+            <svg viewBox="0 0 20 20" fill="none"><path d="M3 10L10 3L17 10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 8.5V16.5H15V8.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            today
+          </div>
+          <div class="nav-item">
+            <svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.6"/><path d="M10 6.5V10L12.3 12.3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            check in
+          </div>
+          <div class="nav-item">
+            <div class="nav-badge">
+              <svg viewBox="0 0 20 20" fill="none"><path d="M3 16V12M8 16V8M13 16V5M18 16V10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+              <span class="lock-dot">
+                <svg width="7" height="7" viewBox="0 0 10 10" fill="none"><rect x="2" y="4.3" width="6" height="4.5" rx="1" stroke="#5f5c73" stroke-width="1"/><path d="M3.2 4.3V3.2C3.2 2.2 3.9 1.5 5 1.5C6.1 1.5 6.8 2.2 6.8 3.2V4.3" stroke="#5f5c73" stroke-width="1"/></svg>
+              </span>
+            </div>
+            insights
+          </div>
+          <div class="nav-item">
+            <svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="6.5" r="3.2" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 17C4.3 13.7 6.9 12 10 12C13.1 12 15.7 13.7 16.5 17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            you
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="caption">
+      <p class="name">coming into focus</p>
+      <span class="vibe">quiet momentum</span>
+      <p class="why">it turns the empty dashboard into a visible countdown of investment already made, so day one reads as "in progress, worth returning to" instead of "broken and blank."</p>
+    </div>
+  </div>
+
+<style>:host{width:432px!important;height:886px!important;min-height:0!important;padding:0!important;margin:0!important;display:block!important;overflow:hidden!important}.side-btn{display:none!important}</style>

@@ -11,6 +11,7 @@
     "update:asmr-videos": "node scripts/update-asmr-videos.mjs"
   },
   "dependencies": {
+    "@notionhq/client": "^5.23.2",
     "next": "16.1.6",
     "react": "19.2.3",
     "react-dom": "19.2.3"

@@ -1,0 +1,596 @@
+<style>
+  :host{
+    --font-display: 'Sora', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+    --ink-primary:   #f7f4ef;
+    --ink-secondary: #cbc4d6;
+    --ink-muted:     #8b8398;
+
+    --glow-1: #ffb454; /* warm amber */
+    --glow-2: #ff7a6b; /* soft coral */
+    --calm-1: #7fe0c9; /* values-mode teal */
+    --calm-2: #9cc9ff; /* values-mode soft blue */
+  }
+
+  *{ box-sizing:border-box; }
+
+  :host,:host{
+    margin:0; padding:0;
+    background:#020203;
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  :host{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding: 48px 20px;
+    background:
+      radial-gradient(60% 50% at 50% 0%, rgba(90,60,120,0.22), transparent 70%),
+      radial-gradient(70% 60% at 50% 100%, rgba(20,10,30,0.6), transparent 70%),
+      #020203;
+  }
+
+  .gallery{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:26px;
+  }
+
+  /* ---------- device frame ---------- */
+  .device{
+    width: 428px;
+    height: 882px;
+    border-radius: 62px;
+    background: linear-gradient(160deg, #2b2b30 0%, #131316 40%, #0a0a0c 100%);
+    box-shadow:
+      0 40px 90px -20px rgba(0,0,0,0.75),
+      0 0 0 1px rgba(255,255,255,0.04) inset,
+      0 2px 0 rgba(255,255,255,0.05) inset;
+    padding: 19px;
+    position: relative;
+  }
+  .device::before{ /* side button, left */
+    content:"";
+    position:absolute; left:-3px; top:150px;
+    width:3px; height:56px; border-radius:3px;
+    background: linear-gradient(180deg,#3a3a40,#141416);
+  }
+  .device::after{ /* side button, right (power) */
+    content:"";
+    position:absolute; right:-3px; top:190px;
+    width:3px; height:86px; border-radius:3px;
+    background: linear-gradient(180deg,#3a3a40,#141416);
+  }
+
+  .screen{
+    width: 390px;
+    height: 844px;
+    border-radius: 46px;
+    overflow: hidden;
+    position: relative;
+    background:
+      radial-gradient(120% 55% at 50% 8%, rgba(140,90,150,0.20), transparent 60%),
+      radial-gradient(90% 70% at 50% 100%, rgba(255,140,90,0.05), transparent 60%),
+      linear-gradient(180deg, #120c1c 0%, #0c0812 45%, #07060a 100%);
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.06) inset;
+  }
+
+  /* subtle film grain, RISE-style texture */
+  .grain{
+    position:absolute; inset:0;
+    filter:url(#grainFilter);
+    opacity:0.05;
+    mix-blend-mode:overlay;
+    pointer-events:none;
+  }
+
+  /* ---------- status bar ---------- */
+  .statusbar{
+    position:relative;
+    height:50px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding: 0 26px 0 28px;
+    color: var(--ink-primary);
+    opacity:0.86;
+  }
+  .statusbar .time{
+    font-family: var(--font-body);
+    font-size:15px;
+    font-weight:600;
+    letter-spacing:0.2px;
+  }
+  .statusbar .icons{ display:flex; align-items:center; gap:6px; }
+  .island{
+    position:absolute;
+    top:12px; left:50%; transform:translateX(-50%);
+    width:100px; height:28px; border-radius:16px;
+    background:#000;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.05) inset;
+  }
+
+  /* ---------- content ---------- */
+  .content{
+    position:relative;
+    height: calc(844px - 50px - 30px);
+    padding: 10px 24px 0 24px;
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .kicker{
+    font-family: var(--font-body);
+    font-size:11.5px;
+    font-weight:600;
+    letter-spacing:2.2px;
+    text-transform:uppercase;
+    color: var(--ink-muted);
+    margin: 10px 0 0 2px;
+  }
+
+  h1.headline{
+    font-family: var(--font-display);
+    font-weight:600;
+    font-size:27px;
+    line-height:1.28;
+    letter-spacing:-0.2px;
+    color: var(--ink-primary);
+    margin: 12px 0 0 0;
+  }
+
+  p.subline{
+    font-family: var(--font-body);
+    font-size:14.5px;
+    line-height:1.5;
+    color: var(--ink-secondary);
+    margin: 10px 2px 0 2px;
+    max-width: 30ch;
+  }
+
+  /* ---------- hero card ---------- */
+  .hero-wrap{
+    flex: 1 1 auto;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin: 18px 0;
+    min-height: 250px;
+  }
+
+  .hero-card{
+    position:relative;
+    width:100%;
+    height:250px;
+    border-radius:26px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015));
+    border: 1px solid rgba(255,255,255,0.07);
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+  }
+
+  .hero-glowblob{
+    position:absolute;
+    top:-70px; left:50%; transform:translateX(-50%);
+    width:280px; height:200px;
+    background: radial-gradient(closest-side, rgba(255,150,90,0.28), transparent 72%);
+    filter: blur(2px);
+    pointer-events:none;
+  }
+
+  .metric-label{
+    font-family: var(--font-body);
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:1.6px;
+    text-transform:uppercase;
+    color: var(--ink-muted);
+    margin-top:22px;
+    position:relative; z-index:2;
+  }
+
+  .metric-number{
+    font-family: var(--font-display);
+    font-weight:200;
+    font-size:76px;
+    line-height:1;
+    letter-spacing:-2px;
+    color: var(--ink-primary);
+    margin-top:2px;
+    position:relative; z-index:2;
+    text-shadow: 0 0 46px rgba(255,150,90,0.35);
+  }
+  .metric-number .unit{
+    font-size:26px;
+    font-weight:300;
+    letter-spacing:0;
+    color: var(--ink-secondary);
+    margin-left:4px;
+  }
+
+  .metric-sub{
+    font-family: var(--font-body);
+    font-size:12.5px;
+    color: var(--ink-secondary);
+    margin-top:4px;
+    position:relative; z-index:2;
+    text-align:center;
+  }
+
+  .curve-svg{
+    position:absolute;
+    bottom:14px; left:0;
+    width:100%; height:118px;
+  }
+
+  .private-note{
+    position:absolute;
+    bottom:10px; right:16px;
+    font-family: var(--font-body);
+    font-size:10px;
+    color: var(--ink-muted);
+    opacity:0.75;
+    letter-spacing:0.2px;
+    z-index:3;
+  }
+
+  /* ---------- actions ---------- */
+  .actions{ display:flex; flex-direction:column; gap:11px; margin-top:2px; }
+
+  .btn{
+    font-family: var(--font-body);
+    border:none;
+    cursor:pointer;
+    border-radius:18px;
+    padding: 15px 18px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:2px;
+    width:100%;
+    text-align:center;
+  }
+  .btn-primary{
+    background: linear-gradient(135deg, var(--glow-1), var(--glow-2));
+    box-shadow: 0 12px 30px -8px rgba(255,120,80,0.55);
+  }
+  .btn-primary .btn-title{
+    font-weight:700; font-size:15.5px; color:#231208;
+  }
+  .btn-primary .btn-sub{
+    font-weight:500; font-size:11.5px; color:rgba(35,18,8,0.7);
+  }
+
+  .btn-secondary{
+    background: rgba(255,255,255,0.045);
+    border: 1px solid rgba(255,255,255,0.10);
+  }
+  .btn-secondary .btn-title{
+    font-weight:600; font-size:15px; color: var(--ink-primary);
+  }
+  .btn-secondary .btn-sub{
+    font-weight:500; font-size:11.5px; color: var(--ink-muted);
+  }
+
+  .dismiss{
+    display:block;
+    text-align:center;
+    font-family: var(--font-body);
+    font-size:13px;
+    color: var(--ink-muted);
+    background:none;
+    border:none;
+    padding: 14px 0 4px 0;
+    cursor:pointer;
+  }
+
+  .home-indicator{
+    position:absolute;
+    bottom:9px; left:50%; transform:translateX(-50%);
+    width:134px; height:5px; border-radius:3px;
+    background: rgba(255,255,255,0.6);
+  }
+
+  /* ---------- breathing stage ---------- */
+  .stage{ display:none; flex-direction:column; height:100%; }
+  .stage.active{ display:flex; }
+  #stage-default.active{ display:flex; }
+
+  .breathe-wrap{
+    flex:1 1 auto;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    min-height:290px;
+  }
+  .breathe-ring{
+    position:absolute;
+    border-radius:50%;
+    background: radial-gradient(circle at 35% 30%, rgba(255,200,150,0.55), rgba(255,120,90,0.18) 55%, transparent 75%);
+  }
+  .ring-a{ width:210px; height:210px; animation: breathe 8s ease-in-out infinite; }
+  .ring-b{ width:150px; height:150px; opacity:0.7; animation: breathe 8s ease-in-out infinite; animation-delay: -0.4s; }
+  .ring-c{ width:96px; height:96px; opacity:0.9; animation: breathe 8s ease-in-out infinite; animation-delay: -0.8s; }
+  @keyframes breathe{
+    0%   { transform: scale(0.72); }
+    50%  { transform: scale(1.08); }
+    100% { transform: scale(0.72); }
+  }
+
+  .breathe-copy{
+    position:relative; z-index:2;
+    display:flex; flex-direction:column; align-items:center; gap:6px;
+  }
+  .breathe-word{
+    font-family: var(--font-display);
+    font-weight:300;
+    font-size:22px;
+    color: var(--ink-primary);
+    letter-spacing:0.3px;
+  }
+  .breathe-time{
+    font-family: var(--font-display);
+    font-weight:200;
+    font-size:15px;
+    color: var(--ink-muted);
+    font-variant-numeric: tabular-nums;
+    letter-spacing:1px;
+  }
+
+  .back-link{
+    text-align:center;
+    font-family: var(--font-body);
+    font-size:13px;
+    color: var(--ink-muted);
+    background:none; border:none; cursor:pointer;
+    padding:12px 0 4px 0;
+  }
+
+  /* ---------- values stage ---------- */
+  .values-wrap{
+    flex:1 1 auto;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:16px;
+    min-height:290px;
+  }
+  .values-label{
+    font-family: var(--font-body);
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:1.6px;
+    text-transform:uppercase;
+    color: var(--ink-muted);
+  }
+  .value-chip{
+    font-family: var(--font-display);
+    font-weight:400;
+    font-size:18px;
+    line-height:1.4;
+    color: var(--ink-primary);
+    text-align:center;
+    padding: 14px 22px;
+    border-radius:18px;
+    background: rgba(127,224,201,0.07);
+    border: 1px solid rgba(127,224,201,0.18);
+    max-width:280px;
+  }
+  .values-foot{
+    font-family: var(--font-body);
+    font-size:12px;
+    color: var(--ink-muted);
+    text-align:center;
+    max-width:26ch;
+  }
+
+  /* ---------- caption ---------- */
+  .caption{
+    width: 428px;
+    max-width: 90vw;
+    text-align:center;
+    color: #d8d4de;
+    font-family: var(--font-body);
+  }
+  .caption .name{
+    font-family: var(--font-display);
+    font-weight:600;
+    font-size:19px;
+    color:#fbf9f6;
+    letter-spacing:-0.1px;
+  }
+  .caption .tag{
+    display:inline-block;
+    margin-left:8px;
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:1.4px;
+    text-transform:uppercase;
+    color:#ffb454;
+    vertical-align:middle;
+  }
+  .caption .why{
+    margin-top:8px;
+    font-size:13.5px;
+    line-height:1.55;
+    color:#a29cb0;
+    max-width:60ch;
+    margin-left:auto; margin-right:auto;
+  }
+  .caption .caveat{
+    margin-top:10px;
+    font-size:11.5px;
+    line-height:1.5;
+    color:#726c7e;
+    max-width:58ch;
+    margin-left:auto; margin-right:auto;
+    font-style:italic;
+  }
+
+
+  .pulse-ring{ animation: pulseRing 2.4s ease-in-out infinite; transform-origin: 72px 60px; }
+  @keyframes pulseRing{
+    0%   { r:6;  opacity:0.35; }
+    70%  { r:13; opacity:0; }
+    100% { r:13; opacity:0; }
+  }
+</style>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <filter id="grainFilter">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch" result="noise"/>
+      <feColorMatrix in="noise" type="matrix"
+        values="0 0 0 0 1
+                0 0 0 0 1
+                0 0 0 0 1
+                0 0 0 0.9 0"/>
+    </filter>
+  </defs>
+</svg>
+
+<div class="gallery">
+  <div class="device">
+    <div class="screen">
+      <div class="grain"></div>
+
+      <div class="statusbar">
+        <span class="time">9:41</span>
+        <div class="island"></div>
+        <div class="icons">
+          <svg width="17" height="11" viewBox="0 0 17 11" fill="none"><path d="M1 9L1 9C1 8.5 1.4 8 2 8C2.5 8 3 8.5 3 9V9C3 9.5 2.5 10 2 10C1.4 10 1 9.5 1 9Z" fill="currentColor"/><rect x="5" y="6" width="2" height="4" rx="0.6" fill="currentColor"/><rect x="9" y="3.5" width="2" height="6.5" rx="0.6" fill="currentColor"/><rect x="13" y="1" width="2" height="9" rx="0.6" fill="currentColor"/></svg>
+          <svg width="20" height="11" viewBox="0 0 20 11" fill="none"><rect x="0.75" y="1" width="16.5" height="9" rx="2.5" stroke="currentColor" stroke-opacity="0.7"/><rect x="2" y="2.2" width="12.6" height="6.6" rx="1.4" fill="currentColor"/><rect x="18" y="3.5" width="1.5" height="4" rx="0.7" fill="currentColor" fill-opacity="0.7"/></svg>
+        </div>
+      </div>
+
+      <div class="content">
+
+        <!-- ================= DEFAULT STAGE ================= -->
+        <div id="stage-default" class="stage active">
+          <div class="kicker">for right now</div>
+          <h1 class="headline">This is a moment,<br>not a decision.</h1>
+          <p class="subline">Whatever happens next, you still get to choose it.</p>
+
+          <div class="hero-wrap">
+            <div class="hero-card">
+              <div class="hero-glowblob"></div>
+
+              <svg class="curve-svg" viewBox="0 0 320 130" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="curveGrad" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stop-color="#ffd6a0"/>
+                    <stop offset="45%" stop-color="#ffb454"/>
+                    <stop offset="100%" stop-color="#ff7a6b"/>
+                  </linearGradient>
+                  <filter id="lineGlow" x="-50%" y="-80%" width="200%" height="260%">
+                    <feGaussianBlur stdDeviation="5.5" result="blur"/>
+                    <feMerge>
+                      <feMergeNode in="blur"/>
+                      <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                  </filter>
+                </defs>
+
+                <!-- soft wash under the curve -->
+                <path d="M2,118 C50,112 78,55 118,28 C150,6 170,10 200,40 C235,75 260,88 318,92 L318,130 L2,130 Z"
+                      fill="url(#curveGrad)" opacity="0.08"/>
+
+                <!-- glowing line -->
+                <path d="M2,118 C50,112 78,55 118,28 C150,6 170,10 200,40 C235,75 260,88 318,92"
+                      fill="none" stroke="url(#curveGrad)" stroke-width="2.5"
+                      stroke-linecap="round" filter="url(#lineGlow)"/>
+
+                <!-- "you are here" marker -->
+                <circle cx="72" cy="60" r="9" fill="#ffb454" opacity="0.22" class="pulse-ring"/>
+                <circle cx="72" cy="60" r="4" fill="#fff3e4"/>
+
+                <text x="72" y="80" text-anchor="middle" font-family="Inter, -apple-system, 'Segoe UI', sans-serif" font-size="9" fill="#cbc4d6" opacity="0.85">now</text>
+                <text x="118" y="18" text-anchor="middle" font-family="Inter, -apple-system, 'Segoe UI', sans-serif" font-size="9" fill="#cbc4d6" opacity="0.7">usual peak</text>
+                <text x="284" y="80" text-anchor="middle" font-family="Inter, -apple-system, 'Segoe UI', sans-serif" font-size="9" fill="#cbc4d6" opacity="0.7">usually eases</text>
+              </svg>
+
+              <div class="metric-label">Urge curve</div>
+              <div class="metric-number">~90<span class="unit">sec to peak</span></div>
+              <div class="metric-sub">Eases within about 8 min, based on your last 12 check-ins</div>
+              <div class="private-note">Only visible to you</div>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="btn btn-primary" data-stage="breathe">
+              <span class="btn-title">Breathe through it</span>
+              <span class="btn-sub">90 seconds, paced breathing</span>
+            </button>
+            <button class="btn btn-secondary" data-stage="values">
+              <span class="btn-title">See what matters to me</span>
+              <span class="btn-sub">your own reasons, in your words</span>
+            </button>
+          </div>
+          <button class="dismiss" data-stage="default">Not right now</button>
+        </div>
+
+        <!-- ================= BREATHING STAGE ================= -->
+        <div id="stage-breathe" class="stage">
+          <div class="kicker">breathing with you</div>
+          <h1 class="headline">Nothing to fix.<br>Just ride it out.</h1>
+          <p class="subline">Follow the glow. In through the nose, out slow.</p>
+
+          <div class="breathe-wrap">
+            <div class="breathe-ring ring-a"></div>
+            <div class="breathe-ring ring-b"></div>
+            <div class="breathe-ring ring-c"></div>
+            <div class="breathe-copy">
+              <div class="breathe-word" id="breatheWord">Breathe in</div>
+              <div class="breathe-time" id="breatheTime">1:30</div>
+            </div>
+          </div>
+
+          <button class="back-link" data-stage="default">Back</button>
+        </div>
+
+        <!-- ================= VALUES STAGE ================= -->
+        <div id="stage-values" class="stage">
+          <div class="kicker">in your own words</div>
+          <h1 class="headline">You wrote these<br>on a clearer day.</h1>
+          <p class="subline">Not a rule. Just a reminder of what you care about.</p>
+
+          <div class="values-wrap">
+            <div class="values-label">Your reasons</div>
+            <div class="value-chip">"Being the dad who's actually present."</div>
+            <div class="value-chip">"Trusting myself again."</div>
+            <div class="values-foot">Only you wrote these. Only you see them.</div>
+          </div>
+
+          <button class="back-link" data-stage="default">Back</button>
+        </div>
+
+      </div>
+
+      <div class="home-indicator"></div>
+    </div>
+  </div>
+
+  <div class="caption">
+    <span class="name">Right Now</span><span class="tag">calm urgency</span>
+    <p class="why">A hand on the shoulder, not a dashboard: it turns an invisible urge into one owned number — "your usual 90 seconds" — and offers two equally-weighted ways through it, urge-surfing or a values reminder, so neither a compulsive nor a values-conflicted user has to fit the other's framing.</p>
+    <p class="caveat">The "~90 sec / ~8 min" figures are placeholder and, even once real, would need far more than 12 logged check-ins before showing them as anything sturdier than "so far."</p>
+  </div>
+</div>
+
+
+
+
+
+<style>:host{width:432px!important;height:886px!important;min-height:0!important;padding:0!important;margin:0!important;display:block!important;overflow:hidden!important}.side-btn{display:none!important}</style>
