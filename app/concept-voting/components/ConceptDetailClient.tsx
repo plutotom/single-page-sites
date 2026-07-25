@@ -28,11 +28,11 @@ export function ConceptDetailClient({
           <p className="concept-voting-kicker">{concept.description}</p>
         </div>
 
+        <VoteBar concept={concept} />
+
         <div className="concept-voting-detail-stage">
           <ConceptFrame concept={concept} template={template} />
         </div>
-
-        <VoteBar concept={concept} />
       </section>
     </main>
   );

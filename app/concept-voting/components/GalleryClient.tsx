@@ -95,8 +95,8 @@ export function GalleryClient({
           <h1 className="concept-voting-heading">Every concept, in one place</h1>
           <p className="concept-voting-kicker">
             {CONCEPTS.length} screens across {CONCEPTS_BY_COLLECTION.length}{" "}
-            collections. Preview below, then vote Yes or No — one vote per
-            concept.
+            collections. Vote Yes or No on each concept first — one vote per
+            screen — then preview the mock below.
           </p>
         </div>
         <Link href="/" className="concept-voting-home-link">
@@ -133,6 +133,23 @@ export function GalleryClient({
         )}
       </nav>
 
+      <div className="concept-voting-meta">
+        <div className="concept-voting-counter">
+          {currentIndex + 1} / {CONCEPTS.length}
+        </div>
+        <h2 className="concept-voting-meta-title">
+          {concept.title}
+          <span
+            className={`concept-voting-kind concept-voting-kind--${concept.kind}`}
+          >
+            {KIND_LABELS[concept.kind]}
+          </span>
+        </h2>
+        <p className="concept-voting-description">{concept.description}</p>
+      </div>
+
+      <VoteBar key={concept.id} concept={concept} />
+
       <div className="concept-voting-stage">
         <button
           type="button"
@@ -157,23 +174,6 @@ export function GalleryClient({
           ›
         </button>
       </div>
-
-      <div className="concept-voting-meta">
-        <div className="concept-voting-counter">
-          {currentIndex + 1} / {CONCEPTS.length}
-        </div>
-        <h2 className="concept-voting-meta-title">
-          {concept.title}
-          <span
-            className={`concept-voting-kind concept-voting-kind--${concept.kind}`}
-          >
-            {KIND_LABELS[concept.kind]}
-          </span>
-        </h2>
-        <p className="concept-voting-description">{concept.description}</p>
-      </div>
-
-      <VoteBar key={concept.id} concept={concept} />
 
       <div className="concept-voting-meta-footer">
         <Link
