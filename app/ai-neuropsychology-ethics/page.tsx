@@ -73,16 +73,24 @@ export default function AiNeuropsychologyEthicsPage() {
           </h2>
           <ol className="list-decimal space-y-2 pl-5 text-sm text-(--gg-slate-muted)">
             <li>
-              American Psychological Association. (2025).{" "}
+              American Psychological Association. (2025, July).{" "}
               <em>
                 Ethical guidance for AI in the professional practice of health
                 service psychology
               </em>
-              .
+              .{" "}
+              <a
+                href="https://www.apa.org/topics/artificial-intelligence-machine-learning/ethical-guidance-professional-practice.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-(--gg-blue) underline underline-offset-2 hover:text-(--gg-blue-muted)"
+              >
+                https://www.apa.org/topics/artificial-intelligence-machine-learning/ethical-guidance-professional-practice.pdf
+              </a>
             </li>
             <li>
-              American Psychological Association. (2026, February 2). Your teen
-              turned to AI instead of you. What experts say parents can do.{" "}
+              American Psychological Association. (2026). Your teen turned to AI
+              instead of you. What experts say parents can do.{" "}
               <a
                 href="https://www.apa.org/topics/artificial-intelligence-machine-learning/teens-chatbots-parents"
                 target="_blank"
@@ -133,8 +141,42 @@ export default function AiNeuropsychologyEthicsPage() {
               </a>
             </li>
             <li>
-              Brown, B., et al. (2020). Language Models are Few-Shot Learners
-              (GPT-3).{" "}
+              Bauer, R. M., Iverson, G. L., Cernich, A. N., Binder, L. M., Ruff,
+              R. M., & Naugle, R. I. (2012). Computerized neuropsychological
+              assessment devices: Joint position paper of the American Academy
+              of Clinical Neuropsychology and the National Academy of
+              Neuropsychology. <em>The Clinical Neuropsychologist</em>, 26(2),
+              177–196.{" "}
+              <a
+                href="https://doi.org/10.1080/13854046.2012.663001"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-(--gg-blue) underline underline-offset-2 hover:text-(--gg-blue-muted)"
+              >
+                https://doi.org/10.1080/13854046.2012.663001
+              </a>
+            </li>
+            <li>
+              Berridge, C. (2016). Breathing room in monitored space: The impact
+              of passive monitoring technology on privacy in independent living.{" "}
+              <em>The Gerontologist</em>, 56(5), 807–816.{" "}
+              <a
+                href="https://doi.org/10.1093/geront/gnv034"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-(--gg-blue) underline underline-offset-2 hover:text-(--gg-blue-muted)"
+              >
+                https://doi.org/10.1093/geront/gnv034
+              </a>
+            </li>
+            <li>
+              Brown, T. B., Mann, B., Ryder, N., Subbiah, M., Kaplan, J.,
+              Dhariwal, P., Neelakantan, A., Shyam, P., Sastry, G., Askell, A.,
+              Agarwal, S., Herbert-Voss, A., Krueger, G., Henighan, T., Child,
+              R., Ramesh, A., Ziegler, D. M., Wu, J., Winter, C., Hesse, C.,
+              Chen, M., Sigler, E., Litwin, M., Gray, S., Chess, B., Clark, J.,
+              Berner, C., McCandlish, S., Radford, A., Sutskever, I., & Amodei,
+              D. (2020). Language models are few-shot learners.{" "}
               <a
                 href="https://arxiv.org/abs/2005.14165"
                 target="_blank"
@@ -142,6 +184,35 @@ export default function AiNeuropsychologyEthicsPage() {
                 className="text-(--gg-blue) underline underline-offset-2 hover:text-(--gg-blue-muted)"
               >
                 https://arxiv.org/abs/2005.14165
+              </a>
+            </li>
+            <li>
+              Chng, S., Jun Wen Tern, M., Seng Lee, Y., Tim-Ee Cheng, L., Kapur,
+              J., Gunnar Eriksson, J., Seng Chong, Y., & Savulescu, J. (2025).
+              Ethical considerations in AI for child health and recommendations
+              for child-centered medical AI. <em>NPJ Digital Medicine</em>,
+              8(152).{" "}
+              <a
+                href="https://doi.org/10.1038/s41746-025-01541-1"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-(--gg-blue) underline underline-offset-2 hover:text-(--gg-blue-muted)"
+              >
+                https://doi.org/10.1038/s41746-025-01541-1
+              </a>
+            </li>
+            <li>
+              Chu, C. H., Nyrup, R., Leslie, K., Shi, J., Bianchi, A., Lyn, A.,
+              McNichol, M., Khan, S., Rahimi, S., & Grenier, A. (2022). Digital
+              ageism: Challenges and opportunities in artificial intelligence
+              for older adults. <em>The Gerontologist</em>, 62(7), 947–955.{" "}
+              <a
+                href="https://doi.org/10.1093/geront/gnab167"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-(--gg-blue) underline underline-offset-2 hover:text-(--gg-blue-muted)"
+              >
+                https://doi.org/10.1093/geront/gnab167
               </a>
             </li>
             <li>
@@ -188,6 +259,19 @@ export default function AiNeuropsychologyEthicsPage() {
               </a>
             </li>
             <li>
+              León-Domínguez, U. (2024). Potential cognitive risks of generative
+              transformer-based AI chatbots on higher order executive functions.{" "}
+              <em>Neuropsychology</em>, 38(4), 293–308.{" "}
+              <a
+                href="https://doi.org/10.1037/neu0000948"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-(--gg-blue) underline underline-offset-2 hover:text-(--gg-blue-muted)"
+              >
+                https://doi.org/10.1037/neu0000948
+              </a>
+            </li>
+            <li>
               Lubbe, A., Marais, E., & Kruger, D. (2025). Cultivating
               independent thinkers: The triad of artificial intelligence,
               Bloom&apos;s taxonomy and critical thinking in assessment
@@ -199,6 +283,18 @@ export default function AiNeuropsychologyEthicsPage() {
                 className="text-(--gg-blue) underline underline-offset-2 hover:text-(--gg-blue-muted)"
               >
                 https://doi.org/10.1007/s10639-025-13476-x
+              </a>
+            </li>
+            <li>
+              Lundervold, A. J. (2025). Precision neuropsychology in the area of
+              AI. <em>Frontiers in Psychology</em>, 16, Article 1537368.{" "}
+              <a
+                href="https://doi.org/10.3389/fpsyg.2025.1537368"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-(--gg-blue) underline underline-offset-2 hover:text-(--gg-blue-muted)"
+              >
+                https://doi.org/10.3389/fpsyg.2025.1537368
               </a>
             </li>
             <li>
@@ -228,20 +324,6 @@ export default function AiNeuropsychologyEthicsPage() {
               </a>
             </li>
             <li>
-              Seo Yi Chng, Jun, M., Lee, Y. S., Cheng, L. T.-E., Kapur, J.,
-              Eriksson, J. G., Chong, Y. S., & Savulescu, J. (2025). Ethical
-              considerations in AI for child health and recommendations for
-              child-centered medical AI. <em>NPJ Digital Medicine</em>, 8(1).{" "}
-              <a
-                href="https://doi.org/10.1038/s41746-025-01541-1"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-(--gg-blue) underline underline-offset-2 hover:text-(--gg-blue-muted)"
-              >
-                https://doi.org/10.1038/s41746-025-01541-1
-              </a>
-            </li>
-            <li>
               Serafimovska, A., Challinor, K. L., & Florio, T. (2025). The AI
               inflection point in clinical neuropsychology: a call to action.{" "}
               <em>Journal of Clinical and Experimental Neuropsychology</em>,
@@ -256,20 +338,24 @@ export default function AiNeuropsychologyEthicsPage() {
               </a>
             </li>
             <li>
-              Vaswani, A., et al. (2017). Attention Is All You Need.{" "}
+              Veneziani, I., Marra, A., Formica, C., Grimaldi, A., Marino, S.,
+              Quartarone, A., & Maresca, G. (2024). Applications of artificial
+              intelligence in the neuropsychological assessment of dementia: A
+              systematic review. <em>Journal of Personalized Medicine</em>,
+              14(1), Article 113.{" "}
               <a
-                href="https://arxiv.org/abs/1706.03762"
+                href="https://doi.org/10.3390/jpm14010113"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-(--gg-blue) underline underline-offset-2 hover:text-(--gg-blue-muted)"
               >
-                https://arxiv.org/abs/1706.03762
+                https://doi.org/10.3390/jpm14010113
               </a>
             </li>
             <li>
-              Wolff, B. (2026). Artificial intelligence and natural language
+              Wolff, B. (2025). Artificial intelligence and natural language
               processing in modern clinical neuropsychology: A narrative review.{" "}
-              <em>The Clinical Neuropsychologist</em>, 40(3), 728–752.{" "}
+              <em>The Clinical Neuropsychologist</em>, 40(3), 1–25.{" "}
               <a
                 href="https://doi.org/10.1080/13854046.2025.2547934"
                 target="_blank"
@@ -277,6 +363,22 @@ export default function AiNeuropsychologyEthicsPage() {
                 className="text-(--gg-blue) underline underline-offset-2 hover:text-(--gg-blue-muted)"
               >
                 https://doi.org/10.1080/13854046.2025.2547934
+              </a>
+            </li>
+            <li>
+              World Health Organization. (2021).{" "}
+              <em>
+                Ethics and governance of artificial intelligence for health: WHO
+                guidance
+              </em>
+              . World Health Organization.{" "}
+              <a
+                href="https://www.who.int/publications/i/item/9789240029200"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-(--gg-blue) underline underline-offset-2 hover:text-(--gg-blue-muted)"
+              >
+                https://www.who.int/publications/i/item/9789240029200
               </a>
             </li>
           </ol>
