@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-10T14:55:15.832Z",
+  "updatedAt": "2026-08-17T14:24:36.114Z",
   "channelHandle": "@OzleyASMR",
   "channelId": "UC_ARaeDGHVLAqi6whEWQRTg",
   "choices": [
@@ -7,6 +7,11 @@
       "label": "Latest upload",
       "type": "playlist",
       "value": "1"
+    },
+    {
+      "label": "Gentle Face Attention",
+      "type": "video",
+      "value": "w_SJ2HMorDU"
     },
     {
       "label": "Anxiety Treatment for Sleep",
@@ -32,11 +37,6 @@
       "label": "Pampering You 🌦️ Realistic Layered Sounds for Sleep",
       "type": "video",
       "value": "ea-Ikzwy-wA"
-    },
-    {
-      "label": "Personal Attention for Sleep",
-      "type": "video",
-      "value": "nNwSrW4pd10"
     }
   ]
 }
