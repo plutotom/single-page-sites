@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-24T14:38:40.727Z",
+  "updatedAt": "2026-08-31T19:49:45.284Z",
   "channelHandle": "@OzleyASMR",
   "channelId": "UC_ARaeDGHVLAqi6whEWQRTg",
   "choices": [
@@ -7,6 +7,11 @@
       "label": "Latest upload",
       "type": "playlist",
       "value": "1"
+    },
+    {
+      "label": "Up Close Attention",
+      "type": "video",
+      "value": "z4zcLOUdsBw"
     },
     {
       "label": "Pampering You to Sleep",
@@ -32,11 +37,6 @@
       "label": "Ear-to-Ear Attention for Sleep",
       "type": "video",
       "value": "Sie7il_BM58"
-    },
-    {
-      "label": "Gently Hypnotizing You to Sleep",
-      "type": "video",
-      "value": "HlAEDa77M5Y"
     }
   ]
 }
