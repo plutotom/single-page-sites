@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-14T19:01:08.410Z",
+  "updatedAt": "2026-09-21T19:02:29.918Z",
   "channelHandle": "@OzleyASMR",
   "channelId": "UC_ARaeDGHVLAqi6whEWQRTg",
   "choices": [
@@ -7,6 +7,11 @@
       "label": "Latest upload",
       "type": "playlist",
       "value": "1"
+    },
+    {
+      "label": "Gentle Hair & Face Attention",
+      "type": "video",
+      "value": "FWlASjCp0YU"
     },
     {
       "label": "When I'm Sleepy",
@@ -32,11 +37,6 @@
       "label": "Gentle Face Attention",
       "type": "video",
       "value": "w_SJ2HMorDU"
-    },
-    {
-      "label": "Anxiety Treatment for Sleep",
-      "type": "video",
-      "value": "ULhoADZ_jvo"
     }
   ]
 }
