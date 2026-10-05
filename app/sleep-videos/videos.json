@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-28T20:22:21.843Z",
+  "updatedAt": "2026-10-05T21:21:30.270Z",
   "channelHandle": "@OzleyASMR",
   "channelId": "UC_ARaeDGHVLAqi6whEWQRTg",
   "choices": [
@@ -9,9 +9,19 @@
       "value": "1"
     },
     {
+      "label": "Doing Your Makeup for Sleep",
+      "type": "video",
+      "value": "_VmNBTWY3Eg"
+    },
+    {
       "label": "Gentle Hair & Face Attention",
       "type": "video",
       "value": "FWlASjCp0YU"
+    },
+    {
+      "label": "Shhh, It's Okay",
+      "type": "video",
+      "value": "VmfISExAZ-w"
     },
     {
       "label": "When I'm Sleepy",
@@ -27,16 +37,6 @@
       "label": "Up Close Attention",
       "type": "video",
       "value": "z4zcLOUdsBw"
-    },
-    {
-      "label": "Pampering You to Sleep",
-      "type": "video",
-      "value": "3eWUgMu0cNQ"
-    },
-    {
-      "label": "Gentle Face Attention",
-      "type": "video",
-      "value": "w_SJ2HMorDU"
     }
   ]
 }
