@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-12T21:58:08.215Z",
+  "updatedAt": "2026-10-19T19:38:14.478Z",
   "channelHandle": "@OzleyASMR",
   "channelId": "UC_ARaeDGHVLAqi6whEWQRTg",
   "choices": [
@@ -19,6 +19,11 @@
       "value": "FWlASjCp0YU"
     },
     {
+      "label": "Shhh, It's Okay",
+      "type": "video",
+      "value": "yE-1-g5M6EA"
+    },
+    {
       "label": "Hypnotizing You to Sleep",
       "type": "video",
       "value": "TGBEEDocWn0"
@@ -32,11 +37,6 @@
       "label": "When I'm Sleepy",
       "type": "video",
       "value": "hgNqiWt4ilY"
-    },
-    {
-      "label": "Deep Ear Attention",
-      "type": "video",
-      "value": "R_mgTGBJFjs"
     }
   ]
 }
