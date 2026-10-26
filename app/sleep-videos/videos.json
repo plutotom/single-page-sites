@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-19T19:38:14.478Z",
+  "updatedAt": "2026-10-26T19:43:42.047Z",
   "channelHandle": "@OzleyASMR",
   "channelId": "UC_ARaeDGHVLAqi6whEWQRTg",
   "choices": [
@@ -19,6 +19,16 @@
       "value": "FWlASjCp0YU"
     },
     {
+      "label": "Gentle Face Attention",
+      "type": "video",
+      "value": "hZHDJqLF05g"
+    },
+    {
+      "label": "Softly Singing You to Sleep",
+      "type": "video",
+      "value": "LrxdXooBpLc"
+    },
+    {
       "label": "Shhh, It's Okay",
       "type": "video",
       "value": "yE-1-g5M6EA"
@@ -27,16 +37,6 @@
       "label": "Hypnotizing You to Sleep",
       "type": "video",
       "value": "TGBEEDocWn0"
-    },
-    {
-      "label": "Shhh, It's Okay",
-      "type": "video",
-      "value": "VmfISExAZ-w"
-    },
-    {
-      "label": "When I'm Sleepy",
-      "type": "video",
-      "value": "hgNqiWt4ilY"
     }
   ]
 }
