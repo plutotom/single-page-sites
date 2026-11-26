@@ -119,12 +119,18 @@ async function main() {
   };
 
   const previousRaw = readFileSync(VIDEOS_PATH, "utf8");
-  const nextRaw = `${JSON.stringify(nextData, null, 2)}\n`;
+  const previous = JSON.parse(previousRaw);
+  const picksUnchanged =
+    previous.channelHandle === nextData.channelHandle &&
+    previous.channelId === nextData.channelId &&
+    JSON.stringify(previous.choices) === JSON.stringify(nextData.choices);
 
-  if (previousRaw === nextRaw) {
+  if (picksUnchanged) {
     console.log("ASMR video picks are already up to date.");
     return;
   }
+
+  const nextRaw = `${JSON.stringify(nextData, null, 2)}\n`;
 
   writeFileSync(VIDEOS_PATH, nextRaw, "utf8");
   console.log(`Updated ${picks.length} video picks from ${CHANNEL_HANDLE}.`);
